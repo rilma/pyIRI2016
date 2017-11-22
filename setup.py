@@ -1,16 +1,8 @@
 #!/usr/bin/env python
-req = ['nose','numpy','scipy','matplotlib','seaborn','pandas','pathlib2',]
-pipreq=['timeutil']
+req = ['nose','numpy','pathlib2',
+        'timeutil']
 # %%
-import pip
-try:
-    import conda.cli
-    conda.cli.main('install',*req)
-except Exception:
-    pip.main(['install'] + req)
-pip.main(['install'] + pipreq)
-# %%
-import setuptools # enables develop
+from setuptools import find_packages
 from numpy.distutils.core import Extension, setup
 from glob import glob
 from os.path import join
@@ -46,7 +38,7 @@ iriDataFiles = [(join(name, join('data', 'ccir')), ccirData),
 if __name__ == '__main__':
 
     setup(name=name,
-          packages=[name],
+          packages=find_packages(),
         version='1.2.2',
         author=['Ronald Ilma','Michael Hirsch, Ph.D.'],
         url = 'https://github.com/rilma/pyIRI2016',
@@ -62,7 +54,9 @@ if __name__ == '__main__':
         ext_package=name,
         ext_modules=[ ext1 ],
         data_files=iriDataFiles,
-        install_requires=pipreq,  # for those not on PyPi
+        install_requires=req,
+        extras_requires={'plot':['matplotlib','seaborn','scipy',],},
         dependency_links=[
-      'https://github.com/rilma/TimeUtilities/zipball/master#egg=timeutil']
+      'https://github.com/rilma/TimeUtilities/zipball/master#egg=timeutil-999.0'],
+        python_requires='>=2.7',
         )
