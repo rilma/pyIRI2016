@@ -17,4 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- [ISSUE 16](https://github.com/rilma/pyIRI2016/issues/16) Set `main` as default branch
+
 ### Fixed
