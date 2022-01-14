@@ -1,0 +1,22 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Check or install poetry
+      block:
+      - name: Check if poetry is installed
+        shell: |
+          poetry --version
+        register: "check_poetry"
+      rescue:
+      - name: Install poetry
+        shell: |
+          curl -sSL https://install.python-poetry.org | python3 -
+        register: "install_poetry"
+      always:
+      - name: About poetry
+        shell: |
+          poetry about
+        register: "about_poetry"
+    - debug: var=check_poetry.stdout_lines
+    - debug: var=install_poetry.stdout_lines
+    - debug: var=about_poetry.stdout_lines
