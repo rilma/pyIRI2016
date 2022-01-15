@@ -4,8 +4,11 @@ try:
 except (ImportError,AttributeError):  # Python < 3.5
     from pathlib2 import Path
 #%%
-from .iriweb import iriwebg
-from timeutil import TimeUtilities
+try:
+    from .iriweb import iriwebg
+    from timeutil import TimeUtilities
+except ModuleNotFoundError:
+    pass    # TODO
 from numpy import arange, nan, ones, squeeze, where
 
 class IRI2016(object):

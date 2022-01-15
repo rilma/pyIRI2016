@@ -101,6 +101,24 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "simple-settings"
+version = "1.2.0"
+description = "A simple way to manage your project settings."
+category = "main"
+optional = false
+python-versions = ">=3.6.1,<4.0"
+
+[package.extras]
+all = ["jsonpickle (==2.0.0)", "toml (==0.10.2)", "PyYAML (==6.0)", "SQLAlchemy (==1.4.26)", "pymemcache (==3.5.0)", "six (==1.16.0)", "redis (==3.5.3)", "boto3 (>=1.20.26,<2.0.0)"]
+dynamic_settings = ["jsonpickle (==2.0.0)"]
+toml = ["toml (==0.10.2)"]
+yaml = ["PyYAML (==6.0)"]
+database = ["SQLAlchemy (==1.4.26)"]
+memcache = ["pymemcache (==3.5.0)", "six (==1.16.0)"]
+redis = ["redis (==3.5.3)"]
+s3 = ["boto3 (>=1.20.26,<2.0.0)"]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -137,7 +155,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.6,<3.11"
-content-hash = "f50eec1fba87da02fb9b847a559e54c225fa744eee5a9ddec3e706beecff749d"
+content-hash = "df4dd16205db80f74313d5dec0c64c80cd11f99252be5e7e73a6a89679398765"
 
 [metadata.files]
 cfgv = [
@@ -275,6 +293,10 @@ pyyaml = [
     {file = "PyYAML-6.0-cp39-cp39-win32.whl", hash = "sha256:b5b9eccad747aabaaffbc6064800670f0c297e52c12754eb1d976c57e4f74dcb"},
     {file = "PyYAML-6.0-cp39-cp39-win_amd64.whl", hash = "sha256:b3d267842bf12586ba6c734f89d1f5b871df0273157918b0ccefa29deb05c21c"},
     {file = "PyYAML-6.0.tar.gz", hash = "sha256:68fb519c14306fec9720a2a5b45bc9f0c8d1b9c72adf45c37baedfcd949c35a2"},
+]
+simple-settings = [
+    {file = "simple-settings-1.2.0.tar.gz", hash = "sha256:db96809e44557672660c7b5a467941d953b6f4f54699425ff25ecb879758d416"},
+    {file = "simple_settings-1.2.0-py3-none-any.whl", hash = "sha256:e6855358ef072c94fe973400ff56ae551eb8e92a4ead35b9eae8a5182409e771"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
