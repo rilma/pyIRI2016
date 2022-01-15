@@ -18,6 +18,12 @@ pip install -e .
 ```
 This also installs [Time Utilities](https://github.com/rilma/TimeUtilities).
 
+## Test
+
+```sh
+make test
+```
+
 ## Examples
 
 ### Height-profile
