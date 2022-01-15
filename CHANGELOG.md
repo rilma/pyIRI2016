@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [ISSUE 18](https://github.com/rilma/pyIRI2016/issues/18)Retrieval of `Fortran`, coefficients, and indices files
 - [ISSUE 13](https://github.com/rilma/pyIRI2016/issues/13) `Python` + `Fortran` in a `Docker` image for `f2py`, or better
 - [ISSUE 14](https://github.com/rilma/pyIRI2016/issues/14) Release a `CHANGELOG`
 - Comprehensive `README` file
