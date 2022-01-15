@@ -51,7 +51,7 @@ These commands are not normally needed unless you want to work with the Fortran 
 ### Compile IRI2016 Fortran
 
 #### In Docker
-Just open a folder in the development container as described [here](https://code.visualstudio.com/docs/remote/containers-tutorial). Then, you are going to have an isolated development environment in which pyIRI2016 can be build up as follows:
+Just open a folder in the development container as described [here](https://code.visualstudio.com/docs/remote/containers-tutorial). Then, you are going to access to an isolated development environment in which pyIRI2016 can be build up as follows:
 
 ```sh
 make build
