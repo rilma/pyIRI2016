@@ -8,6 +8,7 @@ authors = ["Ronald R. Ilma Campana <ronald.ilmacampana@example.com>"]
 python = ">=3.8.6,<3.11"
 numpy = "^1.21.5"
 simple-settings = "^1.2.0"
+beautifulsoup4 = "^4.10.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.16.0"

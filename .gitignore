@@ -7,5 +7,5 @@ build/
 __pycache__/
 
 bin/
-venv35/
 
+.coverage
