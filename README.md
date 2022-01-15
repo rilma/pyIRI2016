@@ -49,6 +49,16 @@ Use this [script](scripts/iri2DExample02.py) to generate a plot of foF2 a functi
 These commands are not normally needed unless you want to work with the Fortran code more directly.
 
 ### Compile IRI2016 Fortran
+
+#### In Docker
+Just open a folder in the development container as described [here](https://code.visualstudio.com/docs/remote/containers-tutorial). Then, you are going to have an isolated development environment in which pyIRI2016 can be build up as follows:
+
+```sh
+make build
+```
+
+#### Deprecated
+
 ```sh
 cd bin
 cmake ../source
