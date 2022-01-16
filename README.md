@@ -5,7 +5,7 @@
 
 ![alt tag](figures/iri2DExample02.gif)
 
-A Python interface to the International Reference Ionosphere (IRI) 2016 model. 
+A Python interface to the [International Reference Ionosphere (IRI) 2016 model](http://irimodel.org/). 
 
 
 ## Installing
