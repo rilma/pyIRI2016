@@ -12,4 +12,9 @@ install:
 	poetry install
 
 test:
-	poetry run coverage run --source=. --module unittest discover --start-directory . --pattern test_*.py --verbose
+	poetry run coverage run \
+		--source=. \
+		--module unittest discover \
+			--start-directory . \
+			--pattern test_*.py \
+			--verbose
