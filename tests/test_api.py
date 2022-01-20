@@ -3,6 +3,7 @@ from pyiri2016.api import update
 from unittest import TestCase
 from simple_settings import LazySettings
 from parameterized import parameterized
+import pathlib
 
 SETTINGS = LazySettings('settings.settings')
 
@@ -16,6 +17,9 @@ class TestApiUpdate(TestCase):
     def tearDownClass(cls):
         cls.temporary_directory.cleanup()
 
+    def _count_files(self, directory: str) -> int:
+        return len([fname for fname in pathlib.Path(directory).iterdir() if fname.is_file()])
+
     @parameterized.expand([
         (SETTINGS.FORTRAN_CODE_URL, SETTINGS.FORTRAN_CODE_COMPRESSED_FILE),
         (SETTINGS.COMMON_FILES_URL, SETTINGS.COMMON_FILES_COMPRESSED_FILE),
@@ -24,4 +28,4 @@ class TestApiUpdate(TestCase):
     ])
     def test_retrieve(self, url: str, filename: str):
         result = update.retrieve(url, filename, directory=self.temporary_directory.name)
-        self.assertIsNone(result)
+        self.assertGreater(self._count_files(self.temporary_directory.name), 0)

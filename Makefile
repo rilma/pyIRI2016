@@ -15,6 +15,6 @@ test:
 	poetry run coverage run \
 		--source=. \
 		--module unittest discover \
-			--start-directory . \
-			--pattern test_*.py \
-			--verbose
+		--start-directory . \
+		--pattern test_*.py \
+		--verbose
