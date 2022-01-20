@@ -57,7 +57,13 @@ These commands are not normally needed unless you want to work with the Fortran 
 ### Compile IRI2016 Fortran
 
 #### In Docker
-[Python dev container](https://github.com/microsoft/vscode-remote-try-python) provides a way to isolate runtime stack and its prerequisites. In Visual Studio Code, open a folder in the development container as described [here](https://code.visualstudio.com/docs/remote/containers-tutorial). In a terminal session, pyIRI2016 can be build up as follows:
+[Python dev container](https://github.com/microsoft/vscode-remote-try-python) provides a way to isolate runtime stack and its prerequisites. In Visual Studio Code, open a folder in the development container as described [here](https://code.visualstudio.com/docs/remote/containers-tutorial). Install pre-requirements as follow:
+
+```sh
+make install
+```
+
+In a terminal session, pyIRI2016 can be build up as follows:
 
 ```sh
 make build
