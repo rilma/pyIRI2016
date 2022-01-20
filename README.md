@@ -63,6 +63,12 @@ These commands are not normally needed unless you want to work with the Fortran 
 make install
 ```
 
+Run unit-testing cases
+
+```sh
+make test
+```
+
 In a terminal session, pyIRI2016 can be build up as follows:
 
 ```sh
