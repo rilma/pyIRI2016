@@ -1,11 +1,10 @@
-[![Build Status](https://travis-ci.org/rilma/pyIRI2016.svg?branch=master)](https://travis-ci.org/rilma/pyIRI2016)
 [![alt tag](https://zenodo.org/badge/DOI/10.5281/zenodo.240895.svg)](https://doi.org/10.5281/zenodo.240895)
 
 # pyIRI2016
 
 ![alt tag](figures/iri2DExample02.gif)
 
-A Python interface to the [International Reference Ionosphere (IRI) 2016 model](http://irimodel.org/). 
+Python wrapper to the [International Reference Ionosphere (IRI) 2016 model](http://irimodel.org/). 
 
 
 ## Installing
