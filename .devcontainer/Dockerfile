@@ -17,8 +17,11 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 RUN rm -f /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends ansible gfortran \
+    && apt-get -y install --no-install-recommends ansible gfortran wget curl \
     && rm -rf /var/lib/apt/lists/*
+
+# Install uv (fast Python package installer and resolver)
+RUN pip install uv
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1

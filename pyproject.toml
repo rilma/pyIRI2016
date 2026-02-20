@@ -5,7 +5,7 @@ description = "International Reference Ionosphere 2016 for Python"
 authors = [{name = "Ronald R. Ilma Campana", email = "ronald.ilmacampana@example.com"}]
 readme = "README.md"
 license = {text = "MIT"}
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
     "Intended Audience :: Science/Research",
     "Development Status :: 5 - Production/Stable",
@@ -13,9 +13,12 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Atmospheric Science",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-    "numpy>=1.21.5",
+    "numpy>=1.26.0,<2.0",
     "simple-settings>=1.2.0",
     "beautifulsoup4>=4.10.0",
     "wget>=3.2",
@@ -29,6 +32,6 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=58,<60", "numpy>=1.21.5", "charset-normalizer>=2.0.0"]
+requires = ["setuptools>=58,<60", "numpy>=1.21.5,<2.0", "charset-normalizer>=2.0.0"]
 build-backend = "setuptools.build_meta"
 

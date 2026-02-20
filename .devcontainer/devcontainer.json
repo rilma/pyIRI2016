@@ -21,7 +21,7 @@
 			"settings": {
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"python.linting.enabled": true,
-				"python.linting.pylintEnabled": true,
+				"python.linting.pylintEnabled": false,
 				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
 				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
@@ -44,7 +44,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "if command -v poetry >/dev/null 2>&1; then poetry install; else pip install --user poetry && ~/.local/bin/poetry install; fi",
+	"postCreateCommand": "pip install --upgrade pip && uv pip install -e .",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
