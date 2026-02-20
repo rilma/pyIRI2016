@@ -1,0 +1,46 @@
+!    -*- f90 -*-
+! Interface file for IRI2016 Fortran extension
+! This file defines which Fortran routines to expose to Python
+python module iriweb ! in 
+    interface  ! in :iriweb
+        subroutine iriwebg(jf,alat,along,iyear,mmdd,slt,glat,glong,stl,f107d,f107,ap,iap,ssn,ig,sax,sday) ! in :iriweb
+            real :: jf(30)
+            real :: alat
+            real :: along
+            integer :: iyear
+            integer :: mmdd
+            real :: slt
+            real :: glat
+            real :: glong
+            real :: stl
+            real :: f107d
+            real :: f107
+            real :: ap
+            integer :: iap
+            integer :: ssn
+            integer :: ig
+            integer :: sax
+            real :: sday
+        end subroutine iriwebg
+        subroutine iritec(jf,alat,along,iyear,mmdd,slt,glat,glong,stl,f107d,f107,ap,iap,ssn,ig,sax,sday) ! in :iriweb
+            real :: jf(30)
+            real :: alat
+            real :: along
+            integer :: iyear
+            integer :: mmdd
+            real :: slt
+            real :: glat
+            real :: glong
+            real :: stl
+            real :: f107d
+            real :: f107
+            real :: ap
+            integer :: iap
+            integer :: ssn
+            integer :: ig
+            integer :: sax
+            real :: sday
+        end subroutine iritec
+    end interface 
+end python module iriweb
+

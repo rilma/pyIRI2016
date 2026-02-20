@@ -1,22 +1,22 @@
 - hosts: localhost
   connection: local
   tasks:
-    - name: Check or install poetry
+    - name: Check or install uv
       block:
-      - name: Check if poetry is installed
+      - name: Check if uv is installed
         shell: |
-          poetry --version
-        register: "check_poetry"
+          uv --version
+        register: "check_uv"
       rescue:
-      - name: Install poetry
+      - name: Install uv with pip
         shell: |
-          curl -sSL https://install.python-poetry.org | python3 -
-        register: "install_poetry"
+          pip install --upgrade uv
+        register: "install_uv"
       always:
-      - name: About poetry
+      - name: About uv
         shell: |
-          poetry about
-        register: "about_poetry"
-    - debug: var=check_poetry.stdout_lines
-    - debug: var=install_poetry.stdout_lines
-    - debug: var=about_poetry.stdout_lines
+          uv --version
+        register: "about_uv"
+    - debug: var=check_uv.stdout_lines
+    - debug: var=install_uv.stdout_lines
+    - debug: var=about_uv.stdout_lines

@@ -18,6 +18,34 @@ pip install -e .
 ```
 This also installs [Time Utilities](https://github.com/rilma/TimeUtilities).
 
+## Development Setup
+
+This project uses [uv](https://github.com/astral-sh/uv) for fast Python package management and project build coordination.
+
+### Requirements
+- Python 3.9+
+- gfortran (for Fortran compilation)
+- uv (install with `pip install uv`)
+
+### Setup Development Environment
+```sh
+# Install uv
+pip install uv
+
+# Install development dependencies and package
+make dev
+# or: PYTHONIOENCODING=utf-8 uv pip install -e . --no-build-isolation
+```
+
+**Note:** The `--no-build-isolation` flag is used to allow setuptools to directly access system dependencies (gfortran) for Fortran compilation. This is necessary for numpy.distutils compatibility.
+
+### Build Fortran Extension
+```sh
+make build
+# or
+PYTHONIOENCODING=utf-8 uv build --no-build-isolation
+```
+
 ## Test
 
 ```sh
@@ -27,7 +55,7 @@ make test
 ```
 
 `make smoke` runs a fast, CI-safe syntax check without network or Fortran build requirements.
-`make health` verifies Python, Poetry, and gfortran are available, then runs `make smoke`.
+`make health` verifies Python, uv, and gfortran are available, then runs `make smoke`.
 
 ## Examples
 
