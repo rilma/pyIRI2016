@@ -1,4 +1,4 @@
-.PHONY : build coverage install test
+.PHONY : build coverage install smoke test
 
 
 build:
@@ -11,10 +11,13 @@ install:
 	ansible-playbook .ansible/poetry.yaml
 	poetry install
 
+smoke:
+	python -m compileall -q pyiri2016 tests settings examples scripts
+
 test:
 	poetry run coverage run \
 		--source=. \
 		--module unittest discover \
 		--start-directory . \
-		--pattern test_*.py \
+		--pattern test*.py \
 		--verbose

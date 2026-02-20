@@ -1,4 +1,5 @@
 [![alt tag](https://zenodo.org/badge/DOI/10.5281/zenodo.240895.svg)](https://doi.org/10.5281/zenodo.240895)
+[![Smoke](https://github.com/rilma/pyIRI2016/actions/workflows/smoke.yml/badge.svg?branch=main)](https://github.com/rilma/pyIRI2016/actions/workflows/smoke.yml)
 
 # pyIRI2016
 
@@ -20,8 +21,11 @@ This also installs [Time Utilities](https://github.com/rilma/TimeUtilities).
 ## Test
 
 ```sh
+make smoke
 make test
 ```
+
+`make smoke` runs a fast, CI-safe syntax check without network or Fortran build requirements.
 
 ## Examples
 
