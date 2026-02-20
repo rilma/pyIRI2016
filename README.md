@@ -21,11 +21,13 @@ This also installs [Time Utilities](https://github.com/rilma/TimeUtilities).
 ## Test
 
 ```sh
+make health
 make smoke
 make test
 ```
 
 `make smoke` runs a fast, CI-safe syntax check without network or Fortran build requirements.
+`make health` verifies Python, Poetry, and gfortran are available, then runs `make smoke`.
 
 ## Examples
 

@@ -1,4 +1,4 @@
-.PHONY : build coverage install smoke test
+.PHONY : build coverage install smoke health test
 
 
 build:
@@ -13,6 +13,12 @@ install:
 
 smoke:
 	python -m compileall -q pyiri2016 tests settings examples scripts
+
+health:
+	python --version
+	poetry --version
+	gfortran --version
+	make smoke
 
 test:
 	poetry run coverage run \
