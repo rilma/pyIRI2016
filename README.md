@@ -23,7 +23,7 @@ This also installs [Time Utilities](https://github.com/rilma/TimeUtilities).
 This project uses [uv](https://github.com/astral-sh/uv) for fast Python package management and project build coordination.
 
 ### Requirements
-- Python 3.9+
+- Python 3.11+
 - gfortran (for Fortran compilation)
 - uv (install with `pip install uv`)
 
