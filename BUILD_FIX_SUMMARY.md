@@ -30,18 +30,20 @@ The migration from Poetry to UV encountered three distinct issues:
 ### 2. setuptools Compatibility with numpy.distutils
 
 **What was the problem:**
-- numpy.distutils is deprecated and only compatible with setuptools < 60.0
-- Modern setuptools (82.0.0) has changed compiler initialization signature
-- Later versions of setuptools removed support for Compiler.__init__() parameter passing
+- numpy.distutils is deprecated but still required for Fortran extension compilation
+- Early setuptools (>= 82.0) completely removed support for numpy.distutils
+- numpy.distutils relies on PEP 517 `build_editable` support
 
 **What was fixed:**
-- Explicitly pin setuptools to version 59.6.0 (latest compatible version)
+- Pin setuptools to `>=60,<70` range which maintains numpy.distutils compatibility
+- setuptools < 70 still supports the `build_editable` API that numpy.distutils requires
+- This allows using modern setuptools with better bug fixes and Python 3.11+ support
 - Specify constraint in both `pyproject.toml` and `Makefile`
 - Use `--no-build-isolation` flag to build directly in system environment
 
 **Files changed:**
-- `pyproject.toml`: `requires = ["setuptools>=59.6,<60", ...]`
-- `Makefile`: All build targets install `setuptools==59.6.0` explicitly
+- `pyproject.toml`: `requires = ["setuptools>=60,<70", ...]`
+- `Makefile`: All build targets use `setuptools>=60,<70` (much improved from 59.6.0)
 
 ### 3. Virtual Environment Handling
 

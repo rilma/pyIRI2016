@@ -46,8 +46,10 @@ All build commands include `PYTHONIOENCODING=utf-8` to handle Fortran file encod
 - Environment variable configured in both Makefile and `.env` file
 
 ### Setuptools Compatibility
-- numpy.distutils requires `setuptools >= 58, < 60` for compatibility
+- numpy.distutils requires `setuptools >= 60, < 70` for compatibility
 - This range supports both PEP 517 build_editable hooks and numpy.distutils
+- setuptools >= 70 removed build_editable support, making it incompatible
+- This allows modern setuptools with better Python 3.11+ support
 - Configured in pyproject.toml build requirements
 
 ### Extension Module
