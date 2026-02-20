@@ -21,8 +21,5 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Install dependencies
-        run: uv sync --extra dev
-
-      - name: Run smoke check
-        run: make smoke
+      - name: Install dependencies and run smoke test
+        run: make dev && make smoke
