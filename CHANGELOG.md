@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **.gitignore enhancements**: Added `.venv/`, `.pytest_cache/`, `htmlcov/` for cleaner repository
 - **Updated GitHub Actions workflow**: Replaced uv package manager with system dependencies (gfortran, cmake)
 - **Comprehensive CI/CD pipeline** (issue #12): Upgraded from minimal smoke test to full testing and quality checks
-  - Multi-version Python testing: 3.11, 3.12, 3.13
+  - Initial effort towards Multi-version Python testing: Set up to 3.11
   - Automated pytest with coverage reports
   - Ruff linting and code formatting checks
   - Mypy type checking
