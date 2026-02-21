@@ -3,14 +3,14 @@ try:
 
     Path().expanduser()
 except (ImportError, AttributeError):  # Python < 3.5
-    from pathlib2 import Path
+    from pathlib2 import Path  # type: ignore
 # %%
 try:
     from .iriweb import iriwebg
     from timeutil import TimeUtilities
 except ModuleNotFoundError:
     # Create a simple fallback for TimeUtilities if not installed
-    class TimeUtilities:
+    class TimeUtilities:  # type: ignore
         @staticmethod
         def ToHMS(hrlt):
             """Convert decimal hours to hours, minutes, seconds"""
