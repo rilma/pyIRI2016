@@ -1,0 +1,26 @@
+# Pre-commit hooks for pyIRI2016
+# Install with: pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.0
+    hooks:
+      - id: ruff
+        name: ruff check
+        args: [--fix]
+      - id: ruff-format
+        name: ruff format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.19.1
+    hooks:
+      - id: mypy
+        name: mypy type check
+        additional_dependencies: [
+          "numpy",
+        ]
+        args: [
+          --ignore-missing-imports,
+        ]
+        exclude: "^(build|dist|source|\.venv)"

@@ -1,5 +1,7 @@
 [![alt tag](https://zenodo.org/badge/DOI/10.5281/zenodo.240895.svg)](https://doi.org/10.5281/zenodo.240895)
-[![Smoke](https://github.com/rilma/pyIRI2016/actions/workflows/smoke.yml/badge.svg?branch=main)](https://github.com/rilma/pyIRI2016/actions/workflows/smoke.yml)
+[![CI](https://github.com/rilma/pyIRI2016/actions/workflows/smoke.yml/badge.svg?branch=main)](https://github.com/rilma/pyIRI2016/actions/workflows/smoke.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 
 # pyIRI2016
 
@@ -48,13 +50,31 @@ Creates source distribution and binary wheel in `dist/` directory.
 ## Test
 
 ```sh
+# Run health checks
 make health
+
+# Run syntax check (smoke test)
 make smoke
+
+# Run all tests
 make test
+
+# Run tests with coverage report
+make coverage
+
+# Code quality checks
+make lint          # Check code with ruff
+make lint-fix      # Auto-fix linting issues
+make format        # Auto-format code with ruff
+make typecheck     # Type checking with mypy
+
+# Run all quality checks
+make pre-commit    # lint + typecheck + test
 ```
 
-`make smoke` runs a fast, CI-safe syntax check without network or Fortran build requirements.
-`make health` verifies Python, gfortran, and cmake are available, then runs `make smoke`.
+**`make smoke`**: Runs fast syntax validation without network or Fortran build requirements.
+**`make health`**: Verifies Python, gfortran, and cmake are available, then runs smoke tests.
+**`make coverage`**: Runs all tests with coverage analysis and generates HTML report in `htmlcov/`.
 
 ## Examples
 
