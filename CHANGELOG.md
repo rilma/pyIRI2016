@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **iri2016prof2D.py Plot2D()**: Modified to save plots to files instead of displaying them interactively
   - Enables headless/CI execution of 2D example scripts
   - Plots saved with descriptive filenames to `figures/` directory
-- **Matplotlib backend configuration**: Set 'Agg' backend in iri2016prof2D.py for robust headless operation
+- **Matplotlib backend configuration**: Configure the 'Agg' backend via the `MPLBACKEND` environment variable (set in the Makefile) for robust headless operation
   - Eliminates display server dependencies and warnings
   - Ensures savefig() works reliably in CI/containerized environments
 - **Documentation consolidation** (issues #26, #28, #29):
