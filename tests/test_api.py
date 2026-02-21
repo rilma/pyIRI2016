@@ -40,13 +40,11 @@ class TestApiUpdate(TestCase):
                 fake_path = str(pathlib.Path(tmpdir) / filename)
                 pathlib.Path(fake_path).write_bytes(b"fake index data")
 
-            with patch("pyiri2016.api.update.wget.download", return_value=fake_path) as mock_download:
+            with patch(
+                "pyiri2016.api.update.wget.download", return_value=fake_path
+            ) as mock_download:
                 update.retrieve(url, filename, directory=tmpdir)
-                mock_download.assert_called_once_with(
-                    f"{url}/{filename}", out=tmpdir, bar=ANY
-                )
+                mock_download.assert_called_once_with(f"{url}/{filename}", out=tmpdir, bar=ANY)
 
-            file_count = len(
-                [f for f in pathlib.Path(tmpdir).iterdir() if f.is_file()]
-            )
+            file_count = len([f for f in pathlib.Path(tmpdir).iterdir() if f.is_file()])
             self.assertGreater(file_count, 0)
