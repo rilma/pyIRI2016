@@ -29,5 +29,5 @@ class TestApiUpdate(TestCase):
         ]
     )
     def test_retrieve(self, url: str, filename: str):
-        result = update.retrieve(url, filename, directory=self.temporary_directory.name)
+        update.retrieve(url, filename, directory=self.temporary_directory.name)
         self.assertGreater(self._count_files(self.temporary_directory.name), 0)

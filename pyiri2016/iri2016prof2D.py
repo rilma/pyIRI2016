@@ -272,7 +272,6 @@ class IRI2016_2DProf(IRI2016Profile):
         dateStr = "DATE: {:4d}/{:02d}/{:02d}".format(self.date[0], self.date[1], self.date[2])
         timeStr = "TIME: {:02d}:{:02d} UT".format(self.time[0], self.time[1])
         f107Str = "F107: {:6.2f}".format(self.f107cm)
-        apStr = "ap: {:3d}".format(int(self.ap))
         ApStr = "Ap: {:3d}".format(int(self.Ap))
         gmlon = self.qdcoordl[0, 0, 0]
         gmlonStr = "{:7.2f} {:s}".format(abs(gmlon), "E" if gmlon > 0.0 else "W")
@@ -611,7 +610,7 @@ class IRI2016_2DProf(IRI2016Profile):
         )
 
         X, Y = meshgrid(self.data2D["lon"], self.data2D["lat"])
-        ipc = self.m.pcolor(X, Y, transpose(arr), cmap=cm.jet, vmax=vmax, vmin=vmin)
+        self.m.pcolor(X, Y, transpose(arr), cmap=cm.jet, vmax=vmax, vmin=vmin)
         self.m.contour(X, Y, transpose(self.data2D["dip"]), colors="k", linestyles="--")
 
         # self.m.plot(X, Y, color='k', linestyle='None', marker='o')
@@ -679,7 +678,7 @@ class IRI2016_2DProf(IRI2016Profile):
         )
 
         X, Y = meshgrid(self.data2DInt["lon"], self.data2DInt["lat"])
-        ipc = self.m.pcolor(X, Y, transpose(arr), cmap=cm.jet, vmax=vmax, vmin=vmin)
+        self.m.pcolor(X, Y, transpose(arr), cmap=cm.jet, vmax=vmax, vmin=vmin)
 
         X0, Y0 = meshgrid(self.data2D["lon"], self.data2D["lat"])
         self.m.contour(X0, Y0, transpose(self.data2D["dip"]), colors="k", linestyles="--")
