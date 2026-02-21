@@ -26,6 +26,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Better separation between `make dev` (development) and `make install` (user installation)
 - **.gitignore enhancements**: Added `.venv/`, `.pytest_cache/`, `htmlcov/` for cleaner repository
 - **Updated GitHub Actions workflow**: Replaced uv package manager with system dependencies (gfortran, cmake)
+- **Comprehensive CI/CD pipeline** (issue #12): Upgraded from minimal smoke test to full testing and quality checks
+  - Multi-version Python testing: 3.11, 3.12, 3.13
+  - Automated pytest with coverage reports
+  - Ruff linting and code formatting checks
+  - Mypy type checking
+  - Codecov coverage integration
+  - 3 parallel CI jobs: build-and-test, lint, typecheck
+- **Code quality tools**:
+  - Ruff: Integrated for linting and code formatting (configured in `pyproject.toml`)
+  - Mypy: Integrated for static type checking with NumPy support
+- **Pre-commit hooks** (issue #12): Added `.pre-commit-config.yaml` for automated local development checks
+  - Ruff check and format on commit
+  - Mypy type checking on commit
+  - Install with: `pre-commit install && pre-commit run --all-files`
+- **Enhanced Makefile targets** (issue #12): New quality assurance commands
+  - `make lint`: Check code with ruff
+  - `make lint-fix`: Auto-fix linting issues
+  - `make format`: Auto-format code with ruff
+  - `make typecheck`: Run mypy static type checking
+  - `make pre-commit`: Run all quality checks (lint + typecheck + test)
 
 ### Changed
 
