@@ -1,53 +1,53 @@
 #!/usr/bin/env python
-from pyiri2016 import IRI2016,IRI2016Profile
+from pyiri2016 import IRI2016, IRI2016Profile
 from numpy import arange
 from matplotlib.pyplot import figure, legend, savefig, close
-import seaborn
 from pathlib import Path
 import uuid
 
-def example08():
 
-    """ GMT Profile Example """
+def example08():
+    """GMT Profile Example"""
 
     hrlim = [0, 24]
     hrstp = 0.25
-    iri2016Obj = IRI2016Profile(hrlim=hrlim, hrstp=hrstp, lat=-11.95, \
-    lon=-76.77, option=8, verbose=False, year=2004)
+    iri2016Obj = IRI2016Profile(
+        hrlim=hrlim, hrstp=hrstp, lat=-11.95, lon=-76.77, option=8, verbose=False, year=2004
+    )
 
     hrbins = arange(hrlim[0], hrlim[1] + hrstp, hrstp)
 
     nhr = hrbins.size
     index = range(nhr)
 
-    fig = figure(figsize=(16,12))
+    fig = figure(figsize=(16, 12))
 
     pn = fig.add_subplot(221)
     NmF2 = iri2016Obj.b[0, index]
     NmF1 = IRI2016()._RmNeg(iri2016Obj.b[2, index])
     NmE = iri2016Obj.b[4, index]
-    pn.plot(hrbins, NmF2, label='N$_m$F$_2$')
-    pn.plot(hrbins, NmF1, label='N$_m$F$_1$')
-    pn.plot(hrbins, NmE, label='N$_m$E')
+    pn.plot(hrbins, NmF2, label="N$_m$F$_2$")
+    pn.plot(hrbins, NmF1, label="N$_m$F$_1$")
+    pn.plot(hrbins, NmE, label="N$_m$E")
     pn.set_title(iri2016Obj.title1)
     pn.set_xlim(hrbins[[0, -1]])
-    pn.set_xlabel('Hour (UT)')
-    pn.set_ylabel('(m$^{-3}$)')        
-    pn.set_yscale('log')
-    legend(loc='best')
+    pn.set_xlabel("Hour (UT)")
+    pn.set_ylabel("(m$^{-3}$)")
+    pn.set_yscale("log")
+    legend(loc="best")
 
     pn = fig.add_subplot(222)
     hmF2 = iri2016Obj.b[1, index]
     hmF1 = IRI2016()._RmNeg(iri2016Obj.b[3, index])
     hmE = iri2016Obj.b[5, index]
-    pn.plot(hrbins, hmF2, label='h$_m$F$_2$')
-    pn.plot(hrbins, hmF1, label='h$_m$F$_1$')
-    pn.plot(hrbins, hmE, label='h$_m$E')
+    pn.plot(hrbins, hmF2, label="h$_m$F$_2$")
+    pn.plot(hrbins, hmF1, label="h$_m$F$_1$")
+    pn.plot(hrbins, hmE, label="h$_m$E")
     pn.set_xlim(hrbins[[0, -1]])
     pn.set_title(iri2016Obj.title2)
-    pn.set_xlabel('Hour (UT)')
-    pn.set_ylabel('(km)')
-    legend(loc='best')    
+    pn.set_xlabel("Hour (UT)")
+    pn.set_ylabel("(km)")
+    legend(loc="best")
 
     # pn = fig.add_subplot(223)
     # tec = iri2016Obj.b[36, index]
@@ -60,20 +60,21 @@ def example08():
 
     pn = fig.add_subplot(224)
     vy = iri2016Obj.b[43, index]
-    pn.plot(hrbins, vy, label=r'V$_y$')
+    pn.plot(hrbins, vy, label=r"V$_y$")
     pn.set_xlim(hrbins[[0, -1]])
-    pn.set_xlabel('Hour (UT)')
-    pn.set_ylabel('(m/s)')
-    legend(loc='best')
+    pn.set_xlabel("Hour (UT)")
+    pn.set_ylabel("(m/s)")
+    legend(loc="best")
 
     # Save to figures folder with unique UUID suffix
     output_dir = Path(__file__).parent.parent / "figures"
     output_dir.mkdir(exist_ok=True)
     unique_id = str(uuid.uuid4())[:8]
     output_file = output_dir / f"iri1DExample08_{unique_id}.png"
-    savefig(output_file, dpi=100, bbox_inches='tight')
+    savefig(output_file, dpi=100, bbox_inches="tight")
     print(f"✓ Plot saved to: {output_file}")
     close(fig)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     example08()
