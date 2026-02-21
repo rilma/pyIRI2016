@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Script display mode**: 2D example scripts now save plots to files instead of attempting interactive display
+  - Enables running scripts in headless/CI environments without display servers
+  - Plots automatically saved to `figures/iri2D_option1.png` and `figures/iri2D_option2.png`
+- **Progress output**: Added informative print statements to 2D example scripts showing computation parameters and status
 - **Plotting dependencies** (issue #28): Added optional `plotting` extras for matplotlib-based visualization
   - matplotlib, scipy, basemap-data, basemap, seaborn
   - Install with: `pip install pyiri2016[plotting]`
@@ -25,6 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **iri2016prof2D.py Plot2D()**: Modified to save plots to files instead of displaying them interactively
+  - Enables headless/CI execution of 2D example scripts
+  - Plots saved with descriptive filenames to `figures/` directory
 - **Documentation consolidation** (issues #26, #28, #29):
   - Updated README.md with links to QUICKSTART.md for detailed setup and examples/README.md for running examples
   - Created examples/README.md with clear instructions for running 1D and 2D plotting examples
@@ -54,6 +61,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Fortran extension missing subroutines** (feature/fixing-scripts): Fixed `ImportError` when importing `irisubgl` and `firisubl` from iriweb module
+  - Updated `generate_f2py.py` to expose all required Fortran subroutines: `iriwebg`, `iritec`, `irisubgl`, `firisubl`
+  - Updated `source/iriweb.pyf` with complete interface definitions for missing subroutines
+  - Recompiled Fortran extension to include all exposed functions
 - **UTF-8 encoding issue** in Fortran source parsing: f2py now correctly handles non-ASCII characters through proper environment variable propagation
 - **GitHub Actions workflow**: Updated to work with new CMake-based build system
 - **Plotting examples** (issue #28): Added missing dependencies and created `make test-examples` target for testing
