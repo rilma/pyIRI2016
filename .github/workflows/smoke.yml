@@ -79,4 +79,4 @@ jobs:
         pip install mypy numpy
 
     - name: Type check with mypy
-      run: mypy pyiri2016 --ignore-missing-imports
+      run: mypy --ignore-missing-imports
