@@ -8,7 +8,17 @@ try:
     from .iriweb import iriwebg
     from timeutil import TimeUtilities
 except ModuleNotFoundError:
-    pass    # TODO
+    # Create a simple fallback for TimeUtilities if not installed
+    class TimeUtilities:
+        @staticmethod
+        def ToHMS(hrlt):
+            """Convert decimal hours to hours, minutes, seconds"""
+            hours = int(hrlt)
+            remaining = (hrlt - hours) * 60
+            minutes = int(remaining)
+            seconds = (remaining - minutes) * 60
+            return hours, minutes, seconds
+
 from numpy import arange, nan, ones, squeeze, where
 
 class IRI2016(object):

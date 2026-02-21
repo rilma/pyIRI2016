@@ -13,7 +13,11 @@ from pyigrf.pyigrf import GetIGRF
 from pyiri2016 import IRI2016
 from pyiri2016 import IRI2016Profile
 from pyiri2016.iriweb import irisubgl, firisubl
-from timeutil import TimeUtilities
+try:
+    from timeutil import TimeUtilities
+except ModuleNotFoundError:
+    # Use fallback TimeUtilities from pyiri2016
+    from pyiri2016 import TimeUtilities
 #
 cwd = Path(__file__).parent
 DataFolder = cwd / 'data'
