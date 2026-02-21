@@ -38,15 +38,15 @@ def main():
     
     source_files = [str(source_dir / f) for f in fortran_sources]
     
-    # f2py command - use 'only:' syntax matching setup.py that was known to work
-    # This tells f2py to only wrap the iriwebg subroutine as the module interface
+    # f2py command - expose all needed subroutines
+    # This tells f2py to wrap iriwebg, iritec, irisubgl, and firisubl
     cmd = [
         sys.executable,
         "-m", "numpy.f2py",
         "-m", "iriweb",
         "--build-dir", str(build_dir),
         "--quiet",
-        "only:", "iriwebg", ":"
+        "only:", "iriwebg", "iritec", "irisubgl", "firisubl", ":"
     ] + source_files
     
     print(f"Running f2py with Python: {sys.executable}")
