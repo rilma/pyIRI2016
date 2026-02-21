@@ -3,9 +3,7 @@ from numpy import arange, array, ceil, empty, floor, isnan, linspace, \
     log10, meshgrid, nan, tile, transpose, where
 from numpy.ma import masked_where
 
-# Set non-interactive matplotlib backend for headless environments
-import matplotlib
-matplotlib.use('Agg')
+# Matplotlib backend is configured via the MPLBACKEND environment variable
 from matplotlib.pyplot import clf, close, cm, colorbar, figure, savefig, show
 from mpl_toolkits.basemap import Basemap
 from os.path import dirname, isdir, join, realpath
