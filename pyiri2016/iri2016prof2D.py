@@ -496,9 +496,14 @@ class IRI2016_2DProf(IRI2016Profile):
         cp = colorbar(ipc)
         cp.set_label('Log$_{10}$N$_e$(m$^{-3}$)')
 
-        if True: show()
-        elif False:
-            pass
+        # Save plot to file instead of displaying
+        figures_dir = Path(__file__).parent.parent / "figures"
+        figures_dir.mkdir(exist_ok=True)
+        filename = f"iri2D_option{self.option}.png"
+        filepath = figures_dir / filename
+        savefig(str(filepath), dpi=100, bbox_inches='tight')
+        print(f"Plot saved to: {filepath}")
+        close()
 
     #
     # End of 'PlotFIRI2D'

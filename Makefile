@@ -58,5 +58,5 @@ test-examples:
 	MPLBACKEND=Agg ./.venv/bin/python examples/iri1DExample01b.py > /dev/null && echo "✓ iri1DExample01b.py passed" || echo "✗ iri1DExample01b.py failed"
 	MPLBACKEND=Agg ./.venv/bin/python examples/iri1DExample02.py > /dev/null && echo "✓ iri1DExample02.py passed" || echo "✗ iri1DExample02.py failed"
 	MPLBACKEND=Agg ./.venv/bin/python examples/iri1DExample08.py > /dev/null && echo "✓ iri1DExample08.py passed" || echo "✗ iri1DExample08.py failed"
-	# MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample01.py > /dev/null && echo "✓ iri2DExample01.py passed" || echo "✗ iri2DExample01.py failed"
-	# MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample02.py > /dev/null && echo "✓ iri2DExample02.py passed" || echo "✗ iri2DExample02.py failed"
+	MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample01.py > /dev/null && echo "✓ iri2DExample01.py passed" || echo "✗ iri2DExample01.py failed"
+	MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample02.py > /dev/null && echo "✓ iri2DExample02.py passed" || echo "✗ iri2DExample02.py failed"
