@@ -452,13 +452,14 @@ class IRI2016_2DProf(IRI2016Profile):
         elif self.option == 8:
             pass
 
-        if True: show()
-        elif False:
-            gpath = '../figures/' + '{:04d}{:02d}{:02d}/'.format(self.year, self.month, self.dom)
-            if not isdir(gpath): mkdir(gpath)
-            figname = gpath + 'iri-{:02d}{:02d}.jpg'.format(self.HH, self.MM)
-            savefig(figname, bbox_inches='tight', format='jpg', dpi=100)
-            # convert -resize 50% -delay 20 -loop 0 *.jpg myimage.gif
+        # Save plot to file instead of displaying
+        figures_dir = Path(__file__).parent.parent / "figures"
+        figures_dir.mkdir(exist_ok=True)
+        filename = f"iri2D_option{self.option}.png"
+        filepath = figures_dir / filename
+        savefig(str(filepath), dpi=100, bbox_inches='tight')
+        print(f"Plot saved to: {filepath}")
+        close()
 
     #
     # End of 'Plot2D'
@@ -499,7 +500,7 @@ class IRI2016_2DProf(IRI2016Profile):
         # Save plot to file instead of displaying
         figures_dir = Path(__file__).parent.parent / "figures"
         figures_dir.mkdir(exist_ok=True)
-        filename = f"iri2D_option{self.option}.png"
+        filename = f"iriFileI2D_option{self.option}.png"
         filepath = figures_dir / filename
         savefig(str(filepath), dpi=100, bbox_inches='tight')
         print(f"Plot saved to: {filepath}")
