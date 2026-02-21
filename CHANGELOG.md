@@ -4,6 +4,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **CMake build system** (issue #26): Modern CMake 3.15+ configuration for cross-platform builds
+- **scikit-build-core backend**: PEP 517/518 compliant build system replacing deprecated numpy.distutils
+- **generate_f2py.py**: Python wrapper script for f2py module generation with proper error handling
+- **f2py_wrapper.sh**: Shell wrapper for setting UTF-8 environment variables during Fortran compilation
+- **Enhanced Makefile targets**:
+  - `make clean-venv`: Remove and rebuild virtual environment from scratch
+  - `make coverage`: Generate pytest coverage reports with HTML output
+  - Better separation between `make dev` (development) and `make install` (user installation)
+- **.gitignore enhancements**: Added `.venv/`, `.pytest_cache/`, `htmlcov/` for cleaner repository
+- **Updated GitHub Actions workflow**: Replaced uv package manager with system dependencies (gfortran, cmake)
+
+### Changed
+
+- **Build system**: Migrated from `setup.py` + `numpy.distutils` to `CMakeLists.txt` + `scikit-build-core`
+- **Documentation**: 
+  - Updated README.md with modern build system instructions
+  - Completely rewrote QUICKSTART.md with CMake-specific guidance
+  - Removed references to deprecated uv package manager
+- **Fortran source files**: Fixed UTF-8 encoding in `source/irifun.for` by converting to ASCII-compatible format
+- **Environment handling**: UTF-8 encoding now managed by Makefile exports, f2py_wrapper.sh, and CMakeLists.txt
+
+### Removed
+
+- **setup.py**: Legacy file using deprecated numpy.distutils (replaced by CMakeLists.txt + pyproject.toml)
+- **uv.lock**: Lock file from old uv package manager
+- **.env**: Environment file (UTF-8 encoding now handled by build infrastructure)
+- **Temporary migration files**:
+  - `CMAKE_MIGRATION_NOTES.md`: Temporary documentation from migration process
+  - `validate_build_env.py`: Temporary validation script (replaced by `make health`)
+  - `test_build.sh`: Temporary test script (replaced by Makefile targets)
+
+### Fixed
+
+- **UTF-8 encoding issue** in Fortran source parsing: f2py now correctly handles non-ASCII characters through proper environment variable propagation
+- **GitHub Actions workflow**: Updated to work with new CMake-based build system
+
 ## [1.2.0] - 2026-02-21
 
 ### Added
