@@ -22,25 +22,6 @@ python module iriweb ! in
             integer :: sax
             real :: sday
         end subroutine iriwebg
-        subroutine iritec(jf,alat,along,iyear,mmdd,slt,glat,glong,stl,f107d,f107,ap,iap,ssn,ig,sax,sday) ! in :iriweb
-            real :: jf(30)
-            real :: alat
-            real :: along
-            integer :: iyear
-            integer :: mmdd
-            real :: slt
-            real :: glat
-            real :: glong
-            real :: stl
-            real :: f107d
-            real :: f107
-            real :: ap
-            integer :: iap
-            integer :: ssn
-            integer :: ig
-            integer :: sax
-            real :: sday
-        end subroutine iritec
         subroutine irisubgl(jf,jmag,iyyyy,mmdd,dhour,coordl,lenl,dirdata,outf1,oarr1) ! in :iriweb
             logical dimension(50),intent(in) :: jf
             integer intent(in) :: jmag
