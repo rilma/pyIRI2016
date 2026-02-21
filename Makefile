@@ -1,4 +1,4 @@
-.PHONY : build coverage install smoke health test test-examples dev dev-plotting clean-venv
+.PHONY : build coverage install smoke health test test-examples dev dev-plotting clean-venv lint lint-fix typecheck format pre-commit
 
 export PYTHONIOENCODING=utf-8
 export LC_ALL=en_US.UTF-8
@@ -12,14 +12,14 @@ dev:
 	./.venv/bin/python -m pip install --upgrade pip wheel setuptools
 	./.venv/bin/python -m pip install 'numpy>=2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja charset-normalizer
 	bash -c 'VIRTUAL_ENV=./.venv PYTHONIOENCODING=utf-8 LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 ./.venv/bin/python -m pip install -e .'
-	./.venv/bin/python -m pip install pre-commit coverage pytest pytest-cov parameterized
+	./.venv/bin/python -m pip install pre-commit coverage pytest pytest-cov parameterized ruff mypy
 
 dev-plotting:
 	[ -d .venv ] || python3 -m venv .venv
 	./.venv/bin/python -m pip install --upgrade pip wheel setuptools
 	./.venv/bin/python -m pip install 'numpy>=2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja charset-normalizer
 	bash -c 'VIRTUAL_ENV=./.venv PYTHONIOENCODING=utf-8 LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 ./.venv/bin/python -m pip install -e .[plotting]'
-	./.venv/bin/python -m pip install pre-commit coverage pytest pytest-cov parameterized
+	./.venv/bin/python -m pip install pre-commit coverage pytest pytest-cov parameterized ruff mypy
 
 build:
 	[ -d .venv ] || python3 -m venv .venv
@@ -60,3 +60,18 @@ test-examples:
 	MPLBACKEND=Agg ./.venv/bin/python examples/iri1DExample08.py > /dev/null && echo "✓ iri1DExample08.py passed" || echo "✗ iri1DExample08.py failed"
 	MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample01.py > /dev/null && echo "✓ iri2DExample01.py passed" || echo "✗ iri2DExample01.py failed"
 	MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample02.py > /dev/null && echo "✓ iri2DExample02.py passed" || echo "✗ iri2DExample02.py failed"
+
+lint:
+	./.venv/bin/python -m ruff check pyiri2016 tests settings examples scripts
+
+lint-fix:
+	./.venv/bin/python -m ruff check pyiri2016 tests settings examples scripts --fix
+
+format:
+	./.venv/bin/python -m ruff format pyiri2016 tests settings examples scripts
+
+typecheck:
+	./.venv/bin/python -m mypy pyiri2016 --ignore-missing-imports
+
+pre-commit: lint typecheck test
+	@echo "✅ All checks passed!"
