@@ -32,9 +32,6 @@ jobs:
     - name: Compile check (smoke test)
       run: make smoke
 
-    - name: Run tests
-      run: make test
-
     - name: Generate coverage report
       run: make coverage
 
