@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Plotting dependencies** (issue #28): Added optional `plotting` extras for matplotlib-based visualization
   - matplotlib, scipy, basemap-data, basemap, seaborn
   - Install with: `pip install pyiri2016[plotting]`
+- **Demo script for saving plots** (issue #28): `examples/demo_save_plots.py` shows how to save plotting examples to PNG files
+  - Useful for headless environments and CI/CD pipelines
+  - Run with: `make demo-plots`
 - **Optional dependency handling**: Made `pyapex` and `pyigrf` optional with graceful error messages when attempting advanced features
   - `LatVsFL()` requires pyapex (install with: `pip install pyapex`)
   - IGRF magnetic field calculations require pyigrf (install with: `pip install pyigrf`)
