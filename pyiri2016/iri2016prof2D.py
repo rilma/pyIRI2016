@@ -1,4 +1,5 @@
 from pathlib import Path
+import uuid
 from numpy import arange, array, ceil, empty, floor, isnan, linspace, \
     log10, meshgrid, nan, tile, transpose, where
 from numpy.ma import masked_where
@@ -457,7 +458,8 @@ class IRI2016_2DProf(IRI2016Profile):
         # Save plot to file instead of displaying
         figures_dir = Path(__file__).parent.parent / "figures"
         figures_dir.mkdir(exist_ok=True)
-        filename = f"iri2D_option{self.option}.png"
+        unique_id = str(uuid.uuid4())[:8]
+        filename = f"iri2D_option{self.option}_{unique_id}.png"
         filepath = figures_dir / filename
         savefig(str(filepath), dpi=100, bbox_inches='tight')
         print(f"Plot saved to: {filepath}")
@@ -502,7 +504,8 @@ class IRI2016_2DProf(IRI2016Profile):
         # Save plot to file instead of displaying
         figures_dir = Path(__file__).parent.parent / "figures"
         figures_dir.mkdir(exist_ok=True)
-        filename = f"iriFIRI2D_option{self.option}.png"
+        unique_id = str(uuid.uuid4())[:8]
+        filename = f"iriFIRI2D_option{self.option}_{unique_id}.png"
         filepath = figures_dir / filename
         savefig(str(filepath), dpi=100, bbox_inches='tight')
         print(f"Plot saved to: {filepath}")
