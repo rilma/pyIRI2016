@@ -29,4 +29,3 @@ def retrieve(url: str, filename: str, directory: str) -> None:
 
             safe_extract(tar, path=directory)
         os.remove(retrieved_fullpath)
-    return None
