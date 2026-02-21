@@ -13,7 +13,10 @@ def retrieve(url: str, filename: str, directory: str) -> None:
                 abs_directory = os.path.abspath(directory)
                 abs_target = os.path.abspath(target)
 
-                return os.path.commonpath([abs_directory, abs_target]) == abs_directory
+                try:
+                    return os.path.commonpath([abs_directory, abs_target]) == abs_directory
+                except ValueError:
+                    return False
 
             def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
 
