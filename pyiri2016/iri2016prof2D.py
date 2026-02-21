@@ -500,7 +500,7 @@ class IRI2016_2DProf(IRI2016Profile):
         # Save plot to file instead of displaying
         figures_dir = Path(__file__).parent.parent / "figures"
         figures_dir.mkdir(exist_ok=True)
-        filename = f"iriFileI2D_option{self.option}.png"
+        filename = f"iriFIRI2D_option{self.option}.png"
         filepath = figures_dir / filename
         savefig(str(filepath), dpi=100, bbox_inches='tight')
         print(f"Plot saved to: {filepath}")
