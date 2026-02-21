@@ -71,7 +71,7 @@ format:
 	./.venv/bin/python -m ruff format pyiri2016 tests settings examples scripts
 
 typecheck:
-	./.venv/bin/python -m mypy pyiri2016 --ignore-missing-imports
+	./.venv/bin/python -m mypy pyiri2016 tests examples scripts --ignore-missing-imports
 
 pre-commit: lint typecheck test
 	@echo "✅ All checks passed!"
