@@ -3,7 +3,7 @@ import tarfile
 import tempfile
 from pyiri2016.api import update
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, ANY
 from simple_settings import LazySettings
 from parameterized import parameterized
 import pathlib
@@ -17,6 +17,7 @@ class TestApiUpdate(TestCase):
         tarball_path = str(pathlib.Path(directory) / filename)
         inner_content = b"fake fortran source"
         buf = io.BytesIO(inner_content)
+        buf.seek(0)
         with tarfile.open(tarball_path, "w") as tar:
             info = tarfile.TarInfo(name="inner_file.f")
             info.size = len(inner_content)
@@ -39,8 +40,11 @@ class TestApiUpdate(TestCase):
                 fake_path = str(pathlib.Path(tmpdir) / filename)
                 pathlib.Path(fake_path).write_bytes(b"fake index data")
 
-            with patch("pyiri2016.api.update.wget.download", return_value=fake_path):
+            with patch("pyiri2016.api.update.wget.download", return_value=fake_path) as mock_download:
                 update.retrieve(url, filename, directory=tmpdir)
+                mock_download.assert_called_once_with(
+                    f"{url}/{filename}", out=tmpdir, bar=ANY
+                )
 
             file_count = len(
                 [f for f in pathlib.Path(tmpdir).iterdir() if f.is_file()]
