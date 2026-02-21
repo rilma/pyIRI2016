@@ -2,56 +2,65 @@
 from pyiri2016 import IRI2016Profile
 from numpy import arange
 from matplotlib.pyplot import figure, legend, savefig, close
-import seaborn
 from pathlib import Path
 import uuid
 
+
 def example01():
+    """Height Profile Example"""
 
-    """ Height Profile Example """
-
-    altlim = [100., 1000.]
-    altstp = 5.
+    altlim = [100.0, 1000.0]
+    altstp = 5.0
     lat, lon = -11.95, -76.77
     year, month, dom = 2003, 11, 21
 
-    iri2016Obj = IRI2016Profile(altlim=altlim, altstp=altstp, lat=lat, \
-        lon=lon, year=year, month=month, dom=dom, option=1, verbose=False)
+    iri2016Obj = IRI2016Profile(
+        altlim=altlim,
+        altstp=altstp,
+        lat=lat,
+        lon=lon,
+        year=year,
+        month=month,
+        dom=dom,
+        option=1,
+        verbose=False,
+    )
 
     altbins = arange(altlim[0], altlim[1] + altstp, altstp)
 
     nalt = len(altbins)
     index = range(nalt)
 
-    fig = figure(figsize=(16,6))
+    fig = figure(figsize=(16, 6))
 
     pn = fig.add_subplot(121)
-    ne = iri2016Obj.a[0, index]        
-    pn.plot(ne, altbins, label='N$_e$')
+    ne = iri2016Obj.a[0, index]
+    pn.plot(ne, altbins, label="N$_e$")
     pn.set_title(iri2016Obj.title1)
-    pn.set_xlabel('Density (m$^{-3}$)')
-    pn.set_ylabel('Altitude (km)')
-    pn.set_xscale('log')
-    legend(loc='best')
+    pn.set_xlabel("Density (m$^{-3}$)")
+    pn.set_ylabel("Altitude (km)")
+    pn.set_xscale("log")
+    legend(loc="best")
 
     pn = fig.add_subplot(122)
     ti = iri2016Obj.a[2, index]
     te = iri2016Obj.a[3, index]
-    pn.plot(ti, altbins, label='T$_i$')
-    pn.plot(te, altbins, label='T$_e$')
+    pn.plot(ti, altbins, label="T$_i$")
+    pn.plot(te, altbins, label="T$_e$")
     pn.set_title(iri2016Obj.title2)
-    pn.set_xlabel('Temperature ($^\circ$)')
-    pn.set_ylabel('Altitude (km)')        
-    legend(loc='best')
+    pn.set_xlabel("Temperature ($^\circ$)")
+    pn.set_ylabel("Altitude (km)")
+    legend(loc="best")
 
     # Save to figures folder with unique UUID suffix
     output_dir = Path(__file__).parent.parent / "figures"
     output_dir.mkdir(exist_ok=True)
     unique_id = str(uuid.uuid4())[:8]
     output_file = output_dir / f"iri1DExample01_{unique_id}.png"
-    savefig(output_file, dpi=100, bbox_inches='tight')
+    savefig(output_file, dpi=100, bbox_inches="tight")
     print(f"✓ Plot saved to: {output_file}")
     close(fig)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     example01()
