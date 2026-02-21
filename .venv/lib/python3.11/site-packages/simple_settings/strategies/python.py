@@ -1,0 +1,35 @@
+import importlib
+import inspect
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class SettingsLoadStrategyPython:
+    """
+    This is the strategy used to read settings from python modules.
+
+    this strategy ignores settings starting with `_`
+    """
+    name = 'python'
+
+    @staticmethod
+    def is_valid_file(file_name):
+        try:
+            importlib.import_module(file_name)
+            return True
+        except (ImportError, TypeError):
+            logger.info(
+                'Cannot load {} as python settings file'.format(file_name)
+            )
+            return False
+
+    @staticmethod
+    def load_settings_file(settings_file):
+        result = {}
+        module = importlib.import_module(settings_file)
+        for setting in (s for s in dir(module) if not s.startswith('_')):
+            setting_value = getattr(module, setting)
+            if not inspect.ismodule(setting_value):
+                result[setting] = setting_value
+        return result
