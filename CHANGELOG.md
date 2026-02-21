@@ -9,17 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Fallback `TimeUtilities` class implementation in `pyiri2016/__init__.py` for robustness when `timeutil` package is unavailable
+- Explicit dependency declaration for `timeutil` package from GitHub in `pyproject.toml`
 
 ### Fixed
 
 - Fixed `NameError: name 'TimeUtilities' is not defined` when `timeutil` package was not installed
-- Added proper dependency declaration for `timeutil` package in `pyproject.toml`
 - Updated imports in `pyiri2016/iri2016prof2D.py` to use fallback `TimeUtilities` if external package is missing
 
 ### Changed
 
-- Updated `pyproject.toml` to explicitly include `timeutil` from GitHub as a project dependency
 - Raised minimum Python version requirement to 3.11
+- Updated `pyproject.toml` to explicitly include `timeutil @ git+https://github.com/rilma/TimeUtilities.git` as a project dependency
+
+### Removed
+
+- **Obsolete Poetry-era build files**: `build_helper.py`, `pyproject_build_hook.py`, `poetry.lock`
+- **Alternative build system**: `meson.build` (root, `pyiri2016/`, `source/`)
+- **Deprecated CI configuration**: `.travis.yml` (replaced by GitHub Actions)
+- **CodeClimate configuration**: `.codeclimate.yml` (unused)
+- **Build artifacts**: `build/`, `dist/`, `pyiri2016.egg-info/` directories (now properly gitignored)
+- **Generated files**: `.coverage` (coverage cache file)
+- **Migration-related artifacts**: `verify_migration.sh`, `.ansible/poetry.yaml`
+- **Redundant configuration**: `setup.cfg` (minimal content consolidated into `setup.py`)
 
 ## [1.1.0] - 2017-01-12
 
