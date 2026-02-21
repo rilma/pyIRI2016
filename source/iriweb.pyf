@@ -41,6 +41,32 @@ python module iriweb ! in
             integer :: sax
             real :: sday
         end subroutine iritec
+        subroutine irisubgl(jf,jmag,iyyyy,mmdd,dhour,coordl,lenl,dirdata,outf1,oarr1) ! in :iriweb
+            logical dimension(50),intent(in) :: jf
+            integer intent(in) :: jmag
+            integer intent(in) :: iyyyy
+            integer intent(in) :: mmdd
+            real intent(in) :: dhour
+            real dimension(lenl,3),intent(in) :: coordl
+            integer, optional,intent(hide),depend(coordl) :: lenl=shape(coordl,0)
+            character*256 intent(in) :: dirdata
+            real dimension(30,lenl),intent(out),depend(lenl) :: outf1
+            real dimension(100,lenl),intent(out),depend(lenl) :: oarr1
+            character*256 :: dirdata1
+            common /folders/ dirdata1
+        end subroutine irisubgl
+        subroutine firisubl(yyyy,ddd,uhour,coordl,lenl,dirdata,edens1,ierr1) ! in :iriweb
+            integer intent(in) :: yyyy
+            integer intent(in) :: ddd
+            real intent(in) :: uhour
+            real dimension(lenl,3),intent(in) :: coordl
+            integer, optional,intent(hide),depend(coordl) :: lenl=shape(coordl,0)
+            character*256 intent(in) :: dirdata
+            real dimension(lenl),intent(out),depend(lenl) :: edens1
+            real dimension(lenl),intent(out),depend(lenl) :: ierr1
+            character*256 :: dirdata1
+            common /folders/ dirdata1
+        end subroutine firisubl
     end interface 
 end python module iriweb
 
