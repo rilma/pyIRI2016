@@ -20,31 +20,34 @@ This also installs [Time Utilities](https://github.com/rilma/TimeUtilities).
 
 ## Development Setup
 
-This project uses [uv](https://github.com/astral-sh/uv) for fast Python package management and project build coordination.
+This project uses a modern CMake-based build system with scikit-build-core for cross-platform compilation.
 
 ### Requirements
 - Python 3.11+
 - gfortran (for Fortran compilation)
-- uv (install with `pip install uv`)
+- CMake 3.15+ (automatically installed by `make dev`)
+- CMake build files are in source, f2py wrapper handles UTF-8 encoding
 
 ### Setup Development Environment
 ```sh
-# Install uv
-pip install uv
-
-# Install development dependencies and package
+# Create venv and install dependencies with Fortran extension
 make dev
-# or: PYTHONIOENCODING=utf-8 uv pip install -e . --no-build-isolation
 ```
 
-**Note:** The `--no-build-isolation` flag is used to allow setuptools to directly access system dependencies (gfortran) for Fortran compilation. This is necessary for numpy.distutils compatibility.
+This target:
+- Creates `.venv` virtual environment
+- Installs NumPy, scikit-build-core, CMake, Ninja
+- Compiles and installs the package in editable mode
+- Installs development tools (pytest, coverage, pre-commit)
 
-### Build Fortran Extension
+**Expected time**: 2-5 minutes on first run (gfortran compilation)
+
+### Build Distribution Packages
 ```sh
 make build
-# or
-PYTHONIOENCODING=utf-8 uv build --no-build-isolation
 ```
+
+Creates source distribution and binary wheel in `dist/` directory.
 
 ## Test
 
@@ -55,7 +58,7 @@ make test
 ```
 
 `make smoke` runs a fast, CI-safe syntax check without network or Fortran build requirements.
-`make health` verifies Python, uv, and gfortran are available, then runs `make smoke`.
+`make health` verifies Python, gfortran, and cmake are available, then runs `make smoke`.
 
 ## Examples
 
@@ -85,37 +88,19 @@ Use this [script](scripts/iri2DExample02.py) to generate a plot of foF2 a functi
 ![alt tag](figures/iri2DExample02.png)
 
 ## Reference
-These commands are not normally needed unless you want to work with the Fortran code more directly.
 
-### Compile IRI2016 Fortran
+### Build System Architecture
 
-#### In Docker
-[Python dev container](https://github.com/microsoft/vscode-remote-try-python) provides a way to isolate runtime stack and its prerequisites. In Visual Studio Code, open a folder in the development container as described [here](https://code.visualstudio.com/docs/remote/containers-tutorial). Install pre-requirements as follow:
+The build system uses:
+- **CMakeLists.txt**: Modern CMake 3.15+ configuration for cross-platform builds
+- **generate_f2py.py**: Python wrapper that generates f2py C/Fortran interface code
+- **f2py_wrapper.sh**: Shell wrapper ensuring UTF-8 environment variables are set for f2py
+- **pyproject.toml**: PEP 517/518 compliant build system using scikit-build-core
 
-```sh
-make install
-```
+The system automatically handles:
+- Fortran source compilation with gfortran
+- f2py wrapper generation (only wraps `iriwebg` subroutine as public interface)
+- NumPy integration for array handling
+- UTF-8 encoding for source files with non-ASCII characters
 
-Run unit-testing cases
-
-```sh
-make test
-```
-
-In a terminal session, pyIRI2016 can be build up as follows:
-
-```sh
-make build
-```
-
-### Manual f2py compile
-The function `DFRIDR()` inside `igrf.for` dynamically calls other functions. 
-This is something `f2py` can't access directly, so we tell `f2py` not to hook into function `DFRIDF()` with the end statement `skip: dfridr`
-```sh
-f2py -m iri2016 -c iriwebg.for irisub.for irifun.for iritec.for iridreg.for igrf.for  cira.for iriflip.for  skip: dfridr
-```
-
-### manual f2py: IGRF only
-```sh
-f2py -m igrf -c irifun.for igrf.for skip: dfridr
-```
+For advanced build control, see `CMakeLists.txt` and `generate_f2py.py`.

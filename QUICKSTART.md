@@ -4,17 +4,32 @@
 
 Just run:
 ```bash
-make dev       # Install with Fortran extension compilation
-make test      # Run tests
+make dev       # Create venv and build with Fortran extension
+make test      # Run test suite with pytest
 make build     # Create distribution packages
 ```
 
 ## What's New in v1.2.0
 
-✅ **TimeUtilities Integration** - Added fallback implementation for robustness when external package is unavailable  
+✅ **CMake Build System** - Replaced deprecated numpy.distutils with modern CMake 3.15+ + scikit-build-core  
+✅ **TimeUtilities Integration** - Added fallback implementation for robustness  
 ✅ **Improved Dependency Management** - Explicit `timeutil` package dependency from GitHub  
 ✅ **Python 3.11+ Minimum** - Raised minimum Python version requirement to 3.11  
-✅ **Project Cleanup** - Removed obsolete Poetry/Meson build files for a cleaner repository  
+✅ **Project Cleanup** - Removed obsolete Poetry/Meson/uv build files  
+
+## Build System Overview
+
+The new build system uses:
+- **CMake 3.15+** for cross-platform compilation
+- **scikit-build-core** backend (PEP 517/518 compliant)
+- **f2py** for Fortran-Python bindings
+- **UTF-8 environment variables** for Fortran source handling
+
+Key files:
+- `CMakeLists.txt` - Build configuration
+- `generate_f2py.py` - f2py wrapper script
+- `f2py_wrapper.sh` - Environment setup for UTF-8 encoding
+- `pyproject.toml` - Package metadata and build dependencies
 
 ## Build Process
 
@@ -26,9 +41,11 @@ make dev
 
 This target:
 - Creates `.venv` virtual environment if needed
-- Installs pip, setuptools 59.6.0, wheel, charset-normalizer
-- Installs package in editable mode with Fortran extension compiled
-- Installs development tools (pre-commit, coverage, parameterized)
+- Installs build tools (NumPy, CMake, Ninja, scikit-build-core)
+- Installs runtime dependencies (simple-settings, beautifulsoup4, wget, charset-normalizer)
+- Compiles Fortran extension (iriweb) with f2py
+- Installs package in editable mode (`pip install -e .`)
+- Installs development tools (pytest, pytest-cov, coverage, pre-commit, parameterized)
 
 **Expected time**: 2-5 minutes (slower on first run due to gfortran compilation)
 
@@ -39,11 +56,11 @@ make test
 ```
 
 This target:
-- Uses coverage to run unittest discovery
-- Tests all modules in current directory
-- Generates coverage report
+- Runs pytest on tests directory
+- Verbose output with short tracebacks
+- Tests module imports and API functionality
 
-**Expected time**: 30 seconds - 2 minutes depending on test count
+**Expected time**: 30 seconds - 2 minutes
 
 ### 3. Build Distribution Packages
 
@@ -53,8 +70,9 @@ make build
 
 This target:
 - Creates source distribution (sdist)
-- Creates binary wheel with compiled extension module
+- Creates binary wheel with compiled Fortran extension
 - Packages available in `dist/` directory
+- Reproducible across platforms
 
 **Expected time**: 2-5 minutes
 
@@ -63,91 +81,139 @@ This target:
 Each phase can also be run independently:
 
 ```bash
-# Just install without dev tools
+# Just install without dev/test tools
 make install
 
 # Quick syntax check only  
 make smoke
 
-# Check tools are available
+# Check tools are available (Python, gfortran, cmake)
 make health
 
-# View coverage report (after running make test)
+# Generate HTML coverage report (requires make test first)
 make coverage
+
+# Remove venv for clean rebuild
+make clean-venv
 ```
 
 ## Verification
 
-After successful `make dev`, verify the extension module:
+After successful `make dev`, verify the extension module loads:
 
 ```bash
-python -c "from pyiri2016 import iriweb; print('✓ Success')"
+./.venv/bin/python -c "from pyiri2016 import iriweb; print('✓ Module loaded OK')"
 ```
 
-## What Changed
+## Build Configuration Details
 
-**Configuration Updates**:
-- `setup.py`: Encoding setup at module import (lines 1-28)
-- `pyproject.toml`: setuptools and charset-normalizer in build dependencies
-- `Makefile`: Global UTF-8 export, venv creation, explicit setuptools version
-- `.env`: Already had PYTHONIOENCODING (confirmed in place)
+### How It Works
 
-**Why These Changes**:
-1. **Fortran files** contain non-ASCII characters → need UTF-8 handling
-2. **numpy.distutils** only works with setuptools < 60.0
-3. **f2py** needs charset-normalizer to auto-detect file encoding
-4. **Environment variables** must be set before subprocesses start
+1. **CMake discovers** Python 3.11 in venv and NumPy location
+2. **generate_f2py.py** runs f2py to create C wrapper code from Fortran sources
+3. **f2py_wrapper.sh** ensures UTF-8 encoding for Fortran source parsing
+4. **CMake compiles** the Fortran sources with gfortran
+5. **Extension module** (`iriweb.so`) linked against NumPy C API
+6. **Package installed** with all data files and Python modules
+
+### UTF-8 Handling
+
+The Fortran source files contain non-ASCII characters that require proper encoding. This is handled by:
+- Setting `PYTHONIOENCODING=utf-8` in shell wrappers
+- Using `charset-normalizer` for f2py encoding auto-detection
+- All build targets export UTF-8 environment variables
 
 ## Troubleshooting
 
-**Issue**: `UnicodeDecodeError` during build  
-**Fix**: Already fixed! charset-normalizer handles this automatically.
+### Build fails with CMake errors
 
-**Issue**: `TypeError: Compiler.__init__()...`  
-**Fix**: Already fixed! setuptools pinned to 59.6.0.
-
-**Issue**: Build still fails  
-**Step 1**: Clean and retry
+**Check CMake version**:
 ```bash
-rm -rf .venv build dist *.egg-info
+cmake --version  # Must be 3.15 or newer
+```
+
+**Check gfortran**:
+```bash
+gfortran --version  # Must be available
+```
+
+**Clean and retry**:
+```bash
+make clean-venv
 make dev
 ```
 
-**Step 2**: Check setuptools version
+### Module import fails
+
+**Step 1**: Verify Fortran extension compiled
 ```bash
-python -m pip show setuptools | grep Version
-# Should show: Version: 59.6.0
+ls -la .venv/lib/python3.11/site-packages/pyiri2016/iriweb*.so
+# Should show the compiled extension module
 ```
 
-**Step 3**: Verify gfortran
+**Step 2**: Check NumPy is available
 ```bash
-gfortran --version  # Must succeed
+./.venv/bin/python -c "import numpy; print(numpy.__version__)"
 ```
 
-**Step 4**: Clean Python cache
+**Step 3**: Check Python path
 ```bash
-find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null
-find . -type d -name "*.egg-info" -exec rm -rf {} + 2>/dev/null
+./.venv/bin/python -c "import sys; print(sys.path)"
+```
+
+### Tests fail to run
+
+**Install test dependencies**:
+```bash
+./.venv/bin/python -m pip install pytest pytest-cov parameterized
+```
+
+**Run with verbose output**:
+```bash
+./.venv/bin/python -m pytest tests/ -vv --tb=long
+```
+
+### Coverage report fails
+
+**Install pytest-cov**:
+```bash
+./.venv/bin/python -m pip install pytest-cov
+```
+
+**Generate coverage**:
+```bash
+make coverage
+# Opens: htmlcov/index.html
 ```
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `Makefile` | Build automation - edit to change build process |
-| `pyproject.toml` | PEP 518 build config - dependencies and metadata |
-| `setup.py` | Package setup and Fortran extension definition |
-| `.env` | Environment variables (UTF-8 encoding) |
+| `CMakeLists.txt` | CMake build configuration - edit to change build process |
+| `generate_f2py.py` | f2py wrapper - generates C code from Fortran |
+| `f2py_wrapper.sh` | Shell wrapper - sets encoding environment variables |
+| `pyproject.toml` | PEP 517/518 build config - dependencies and metadata |
+| `Makefile` | Build automation - convenient targets |
+| `setup.py` | Legacy file - kept for compatibility, not used |
 
 
 ## Next Steps
 
-1. Run `make dev` to test the installation
-2. Run `make test` to verify functionality
-3. Run `make build` to create distribution packages
-4. See `CHANGELOG.md` for release notes
+1. Run `make dev` to complete the installation
+2. Run `make test` to verify all tests pass
+3. Run `make coverage` to see code coverage report
+4. Run `make build` to create distribution packages
+5. See `CHANGELOG.md` for release notes
 
 ## Success Criteria
+
+After running `make dev && make test`:
+- ✅ All 4 tests pass
+- ✅ Module imports successfully
+- ✅ Fortran extension module (`iriweb.so`) exists
+- ✅ Example scripts run and produce correct output
+
 
 After `make dev`:
 ```bash
