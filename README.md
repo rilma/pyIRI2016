@@ -22,13 +22,9 @@ This also installs [Time Utilities](https://github.com/rilma/TimeUtilities).
 
 This project uses a modern CMake-based build system with scikit-build-core for cross-platform compilation.
 
-### Requirements
-- Python 3.11+
-- gfortran (for Fortran compilation)
-- CMake 3.15+ (automatically installed by `make dev`)
-- CMake build files are in source, f2py wrapper handles UTF-8 encoding
+For detailed setup instructions, build troubleshooting, and advanced configuration, see [QUICKSTART.md](QUICKSTART.md).
 
-### Setup Development Environment
+### Quick Start
 ```sh
 # Create venv and install dependencies with Fortran extension
 make dev
@@ -62,30 +58,14 @@ make test
 
 ## Examples
 
-### Height-profile
-Use this [script](examples/iri1DExample01.py) to generate a plot of density and temperatures vs height:
+For running examples and plotting demonstrations, see [examples/README.md](examples/README.md).
 
-![alt tag](figures/iri1DExample01.png)
+Example outputs:
 
-### Latitudinal profile
-Use this [script](examples/iri1DExample02.py) to generate a plot of densities and height at the peak of F2, F2, and E regions vs geographic latitude:
-
-![alt tag](figures/iri1DExample02.png)
-
-### GMT profile
-Use this [script](examples/iri1DExample08.py) to generate a plot of densities and height at the peak of F2, F2, and E regions vs universal time:
-
-![alt tag](figures/iri1DExample08.png)
-
-### Height vs GMT
-Use this [script](scripts/iri2DExample01.py) to generate a plot of Ne, Te, and Ti as a function of height and universal time:
-
-![alt tag](figures/iri2DExample01.png)
-
-### Latitude vs Longitude
-Use this [script](scripts/iri2DExample02.py) to generate a plot of foF2 a function of geographic latitude and longitude:
-
-![alt tag](figures/iri2DExample02.png)
+| | |
+|---|---|
+| ![Height Profile](figures/iri1DExample01.png) | ![Latitude Profile](figures/iri1DExample02.png) |
+| ![Time Profile](figures/iri1DExample08.png) | ![Height vs Time](figures/iri2DExample01.png) |
 
 ## Reference
 

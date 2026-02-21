@@ -1,77 +1,45 @@
-# Plotting Examples
+# Examples
 
-This directory contains example scripts demonstrating IRI2016 ionospheric profile calculations and visualizations.
+This directory contains example scripts demonstrating IRI2016 ionospheric profile calculations.
 
 ## Running Examples
 
-### Basic Examples (No Plotting Dependencies Required)
+### Basic Examples
 ```bash
 python examples/example01.py
 python examples/example02.py
 ```
 
-### Plotting Examples (Requires `plotting` extras)
+### 1D Profile Examples (Height, Latitude, Time)
 
-Install plotting dependencies:
+First, install plotting dependencies:
 ```bash
 make dev-plotting
 ```
 
-**Interactive Display (requires X11/display):**
+Then run the examples:
 ```bash
-# 1D Height Profiles
-python examples/iri1DExample01.py
-python examples/iri1DExample01b.py
-python examples/iri1DExample02.py
-python examples/iri1DExample08.py
+python examples/iri1DExample01.py   # Height profile
+python examples/iri1DExample01b.py  # Height profile (alternate)
+python examples/iri1DExample02.py   # Latitude profile
+python examples/iri1DExample08.py   # Time profile
 ```
 
-**Headless Rendering with File Output:**
-```bash
-# Generate plots and save to figures/ directory
-make demo-plots
+### 2D Examples
 
-# Or manually with MPLBACKEND=Agg
-MPLBACKEND=Agg python examples/demo_save_plots.py
+First, install plotting dependencies:
+```bash
+make dev-plotting
 ```
 
-### 2D Map Examples
-
-Located in `scripts/` directory:
+Then run the 2D examples (located in `scripts/` directory):
 ```bash
-# Headless rendering (saves plots)
-MPLBACKEND=Agg python scripts/iri2DExample01.py
-MPLBACKEND=Agg python scripts/iri2DExample02.py
-```
-
-## demo_save_plots.py
-
-This script demonstrates how to save plotting examples to PNG files instead of displaying them interactively. This is useful for:
-
-- **Headless environments** (CI/CD, Docker containers, remote servers)
-- **Batch processing** (generating multiple plots automatically)
-- **Documentation** (creating static plot galleries)
-- **Non-interactive workflows**
-
-All plots are saved to the `figures/` directory as high-quality PNG files (150 DPI).
-
-## Output Locations
-
-- **Interactive plots**: Displayed in matplotlib window
-- **Saved plots**: `figures/` directory relative to project root
-  - `1d_height_profile.png` - Height vs. electron density and temperature
-  - `2d_height_vs_time.png` - 2D profile height vs. time
-  - `2d_lat_vs_lon_map.png` - 2D latitude vs. longitude map with Basemap
-
-## Testing Examples
-
-Run all examples (including headless plotting):
-```bash
-make test-examples
+python scripts/iri2DExample01.py    # Height vs. Time
+python scripts/iri2DExample02.py    # Latitude vs. Longitude
 ```
 
 ## Notes
 
-- Some advanced methods (`LatVsFL`, IGRF calculations) require additional optional dependencies
-- Use `MPLBACKEND=Agg` for headless plotting (no X11 display required)
+- For headless environments, use: `MPLBACKEND=Agg python examples/iri1DExample01.py`
 - Modify example scripts to customize parameters (latitude, longitude, altitude range, etc.)
+
