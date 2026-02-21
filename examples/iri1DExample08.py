@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 from pyiri2016 import IRI2016,IRI2016Profile
 from numpy import arange
-from matplotlib.pyplot import figure, legend, show
+from matplotlib.pyplot import figure, legend, savefig, close
 import seaborn
+from pathlib import Path
+import uuid
 
 def example08():
 
@@ -64,9 +66,14 @@ def example08():
     pn.set_ylabel('(m/s)')
     legend(loc='best')
 
+    # Save to figures folder with unique UUID suffix
+    output_dir = Path(__file__).parent.parent / "figures"
+    output_dir.mkdir(exist_ok=True)
+    unique_id = str(uuid.uuid4())[:8]
+    output_file = output_dir / f"iri1DExample08_{unique_id}.png"
+    savefig(output_file, dpi=100, bbox_inches='tight')
+    print(f"✓ Plot saved to: {output_file}")
+    close(fig)
 
 if __name__ == '__main__':
-
     example08()
-
-    show()
