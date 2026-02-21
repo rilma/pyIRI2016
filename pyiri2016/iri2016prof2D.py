@@ -1,13 +1,13 @@
+import uuid
 from pathlib import Path
+import uuid
 from numpy import arange, array, ceil, empty, floor, isnan, linspace, \
     log10, meshgrid, nan, tile, transpose, where
 from numpy.ma import masked_where
 
 # Matplotlib backend is configured via the MPLBACKEND environment variable
-from matplotlib.pyplot import clf, close, cm, colorbar, figure, savefig, show
+from matplotlib.pyplot import close, cm, colorbar, figure, savefig
 from mpl_toolkits.basemap import Basemap
-from os.path import dirname, isdir, join, realpath
-from os import mkdir
 import seaborn
 from scipy.interpolate import interp2d#, RectBivariateSpline
 #
@@ -327,13 +327,19 @@ class IRI2016_2DProf(IRI2016Profile):
 
                 counter += 1
 
-        show()
+        # Save plot to file instead of displaying
+        figures_dir = Path(__file__).parent.parent / "figures"
+        figures_dir.mkdir(exist_ok=True)
+        filepath = figures_dir / "iri_lat_vs_fl.png"
+        savefig(str(filepath), dpi=100, bbox_inches='tight')
+        print(f"Plot saved to: {filepath}")
+        close()
 
     #
     # End of 'PlotLatVsFL'
     #####
 
-    def PlotLatVsFLFIRI(self, save=False, verbose=False):
+    def PlotLatVsFLFIRI(self, verbose=False):
 
         self._Get_Title()
 
@@ -377,17 +383,12 @@ class IRI2016_2DProf(IRI2016Profile):
 
                 counter += 1
 
-        if not save:
-            show()
-        else:
-            gpath = '../figures/' + '{:04d}{:02d}{:02d}/'.format(self.year, self.month, self.dom)
-            if not isdir(gpath): mkdir(gpath)
-            self.figname = gpath + 'firi-{:02d}{:02d}.jpg'.format(self.time[0], self.time[1])
-            if verbose: print('Saving at: {:s}'.format(self.figname))
-            savefig(self.figname, bbox_inches='tight', format='jpg', dpi=100)
-
-
-        clf()
+        # Save plot to file instead of displaying
+        figures_dir = Path(__file__).parent.parent / "figures"
+        figures_dir.mkdir(exist_ok=True)
+        filepath = figures_dir / "iri_lat_vs_fl_firi.png"
+        if verbose: print(f"Saving at: {filepath}")
+        savefig(str(filepath), dpi=100, bbox_inches='tight')
         close()
 
     #
@@ -457,7 +458,8 @@ class IRI2016_2DProf(IRI2016Profile):
         # Save plot to file instead of displaying
         figures_dir = Path(__file__).parent.parent / "figures"
         figures_dir.mkdir(exist_ok=True)
-        filename = f"iri2D_option{self.option}.png"
+        unique_id = str(uuid.uuid4())[:8]
+        filename = f"iri2D_option{self.option}_{unique_id}.png"
         filepath = figures_dir / filename
         savefig(str(filepath), dpi=100, bbox_inches='tight')
         print(f"Plot saved to: {filepath}")
@@ -502,7 +504,8 @@ class IRI2016_2DProf(IRI2016Profile):
         # Save plot to file instead of displaying
         figures_dir = Path(__file__).parent.parent / "figures"
         figures_dir.mkdir(exist_ok=True)
-        filename = f"iriFIRI2D_option{self.option}.png"
+        unique_id = str(uuid.uuid4())[:8]
+        filename = f"iriFIRI2D_option{self.option}_{unique_id}.png"
         filepath = figures_dir / filename
         savefig(str(filepath), dpi=100, bbox_inches='tight')
         print(f"Plot saved to: {filepath}")
@@ -540,7 +543,13 @@ class IRI2016_2DProf(IRI2016Profile):
         f.add_subplot(236)
         self.MapPColorInt(self.data2DInt['B0'], 250., 100.)
 
-        show()
+        # Save plot to file instead of displaying
+        figures_dir = Path(__file__).parent.parent / "figures"
+        figures_dir.mkdir(exist_ok=True)
+        filepath = figures_dir / "iri2D_muf.png"
+        savefig(str(filepath), dpi=100, bbox_inches='tight')
+        print(f"Plot saved to: {filepath}")
+        close()
 
 
     def MapPColor(self, arr, vmax, vmin):
