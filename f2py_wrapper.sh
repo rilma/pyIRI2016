@@ -8,5 +8,8 @@ export LANG=en_US.UTF-8
 # Get the Python executable from environment or use system python3
 PYTHON_EXE="${PYTHON_EXECUTABLE:-python3}"
 
-# Run the Python wrapper script
-"$PYTHON_EXE" /workspaces/pyIRI2016/generate_f2py.py "$@"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Run the Python wrapper script using relative path
+"$PYTHON_EXE" "$SCRIPT_DIR/generate_f2py.py" "$@"
