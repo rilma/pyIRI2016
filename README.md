@@ -84,8 +84,10 @@ Example outputs:
 
 | | |
 |---|---|
-| ![Height Profile](figures/iri1DExample01.png) | ![Latitude Profile](figures/iri1DExample02.png) |
-| ![Time Profile](figures/iri1DExample08.png) | ![Height vs Time](figures/iri2DExample01.png) |
+| ![Height Profile](figures/iri1DExample01.png) |
+| ![Height vs Time](figures/iri2DExample01.png) |
+| ![Time Profile](figures/iri1DExample08.png) |
+| ![Latitude Profile](figures/iri1DExample02.png) |
 
 ## Reference
 
