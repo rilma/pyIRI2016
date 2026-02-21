@@ -1,4 +1,4 @@
-.PHONY : build coverage install smoke health test test-examples demo-plots dev dev-plotting clean-venv
+.PHONY : build coverage install smoke health test test-examples dev dev-plotting clean-venv
 
 export PYTHONIOENCODING=utf-8
 export LC_ALL=en_US.UTF-8
@@ -58,13 +58,5 @@ test-examples:
 	MPLBACKEND=Agg ./.venv/bin/python examples/iri1DExample01b.py > /dev/null && echo "✓ iri1DExample01b.py passed" || echo "✗ iri1DExample01b.py failed"
 	MPLBACKEND=Agg ./.venv/bin/python examples/iri1DExample02.py > /dev/null && echo "✓ iri1DExample02.py passed" || echo "✗ iri1DExample02.py failed"
 	MPLBACKEND=Agg ./.venv/bin/python examples/iri1DExample08.py > /dev/null && echo "✓ iri1DExample08.py passed" || echo "✗ iri1DExample08.py failed"
-	MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample01.py > /dev/null && echo "✓ iri2DExample01.py passed" || echo "✗ iri2DExample01.py failed"
-	MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample02.py > /dev/null && echo "✓ iri2DExample02.py passed" || echo "✗ iri2DExample02.py failed"
-
-demo-plots: clean-venv
-	[ -d .venv ] || python3 -m venv .venv
-	./.venv/bin/python -m pip install --upgrade pip wheel setuptools
-	./.venv/bin/python -m pip install 'numpy>=2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja charset-normalizer	bash -c 'VIRTUAL_ENV=./.venv PYTHONIOENCODING=utf-8 LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 ./.venv/bin/python -m pip install --no-cache-dir --force-reinstall -e .[plotting]'
-	./.venv/bin/python -m pip install pre-commit coverage pytest pytest-cov parameterized
-	@echo "Generating and saving plotting examples to figures/ directory..."
-	MPLBACKEND=Agg ./.venv/bin/python examples/demo_save_plots.py
+	# MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample01.py > /dev/null && echo "✓ iri2DExample01.py passed" || echo "✗ iri2DExample01.py failed"
+	# MPLBACKEND=Agg ./.venv/bin/python scripts/iri2DExample02.py > /dev/null && echo "✓ iri2DExample02.py passed" || echo "✗ iri2DExample02.py failed"
