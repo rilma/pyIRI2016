@@ -8,9 +8,9 @@ def retrieve(url: str, filename: str, directory: str) -> None:
     if tarfile.is_tarfile(retrieved_fullpath):
         with tarfile.open(retrieved_fullpath) as tar:
 
-            def is_within_directory(directory, target):
+            def is_within_directory(base_dir, target):
 
-                abs_directory = os.path.abspath(directory)
+                abs_directory = os.path.abspath(base_dir)
                 abs_target = os.path.abspath(target)
 
                 try:
