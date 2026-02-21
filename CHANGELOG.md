@@ -65,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - **Fortran extension missing subroutines** (feature/fixing-scripts): Fixed `ImportError` when importing `irisubgl` and `firisubl` from iriweb module
-  - Updated `generate_f2py.py` to expose all required Fortran subroutines: `iriwebg`, `iritec`, `irisubgl`, `firisubl`
+  - Updated `generate_f2py.py` to expose all required Fortran subroutines: `iriwebg`, `irisubgl`, `firisubl`
   - Updated `source/iriweb.pyf` with complete interface definitions for missing subroutines
   - Recompiled Fortran extension to include all exposed functions
 - **UTF-8 encoding issue** in Fortran source parsing: f2py now correctly handles non-ASCII characters through proper environment variable propagation
