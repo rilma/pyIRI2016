@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Script display mode**: 2D example scripts now save plots to files instead of attempting interactive display
   - Enables running scripts in headless/CI environments without display servers
-  - Plots automatically saved to `figures/iri2D_option1.png` and `figures/iri2D_option2.png`
+  - Plots automatically saved to `figures/` with UUID-suffixed filenames, e.g. `figures/iri2D_option1_<uuid>.png` and `figures/iri2D_option2_<uuid>.png`
 - **Progress output**: Added informative print statements to 2D example scripts showing computation parameters and status
 - **Plotting dependencies** (issue #28): Added optional `plotting` extras for matplotlib-based visualization
   - matplotlib, scipy, basemap-data, basemap, seaborn
