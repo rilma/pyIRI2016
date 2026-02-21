@@ -3386,10 +3386,10 @@ C
 C REFERENCES:
 C   Triskova, L., Truhlik, V., Smilauer, J. An empirical model of ion
 C      composition in the outer ionosphere. Adv. Space Res. 31 (3),
-C      653–663, 2003.
+C      653-663, 2003.
 C   Truhlik, V., Triskova, L., Smilauer, J. New advances in empirical
 C      modeling of ion composition in the outer ionosphere. Adv. Space
-C      Res. 33, 844–849, 2004.
+C      Res. 33, 844-849, 2004.
 C   Truhlik V., D. Bilitza, L. Triskova, Towards better description of
 C     solar activity variation in the International Reference Ionosphere
 C     topside ion composition model, Advances in Space Research,
@@ -10685,7 +10685,7 @@ C corresponds to the given MLT value (xmlt).
 C
 C Y. Zhang and L.J. Paxton, An empirical Kp-dependent global auroral
 C model based on TIMED/GUVI FUV data, Journal of Atmospheric and
-C Solar-Terrestrial Physics 70, 1231–1242, 2008.
+C Solar-Terrestrial Physics 70, 1231-1242, 2008.
 C
 C-----------------------------------------------------------------------
 

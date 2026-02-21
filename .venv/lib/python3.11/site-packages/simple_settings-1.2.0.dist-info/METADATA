@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: simple-settings
+Version: 1.2.0
+Summary: A simple way to manage your project settings.
+Home-page: https://github.com/drgarcia1986/simple-settings
+License: MIT
+Keywords: django,flask,bottle,tornado,settings,configuration,conf
+Author: Diego Garcia
+Author-email: drgarcia1986@gmail.com
+Requires-Python: >=3.6.1,<4.0
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Provides-Extra: all
+Provides-Extra: database
+Provides-Extra: dynamic_settings
+Provides-Extra: memcache
+Provides-Extra: redis
+Provides-Extra: s3
+Provides-Extra: toml
+Provides-Extra: yaml
+Requires-Dist: PyYAML (==6.0); extra == "all" or extra == "yaml"
+Requires-Dist: SQLAlchemy (==1.4.26); extra == "all" or extra == "database"
+Requires-Dist: boto3 (>=1.20.26,<2.0.0); extra == "all" or extra == "s3"
+Requires-Dist: jsonpickle (==2.0.0); extra == "all" or extra == "dynamic_settings"
+Requires-Dist: pymemcache (==3.5.0); extra == "all" or extra == "memcache"
+Requires-Dist: redis (==3.5.3); extra == "all" or extra == "redis"
+Requires-Dist: six (==1.16.0); extra == "all" or extra == "memcache"
+Requires-Dist: toml (==0.10.2); extra == "all" or extra == "toml"
+Project-URL: Download, https://github.com/drgarcia1986/simple-settings/tarball/master
+Project-URL: Repository, https://github.com/drgarcia1986/simple-settings
