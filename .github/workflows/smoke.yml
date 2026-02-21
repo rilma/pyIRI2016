@@ -16,10 +16,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v2
-        with:
-          enable-cache: true
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gfortran cmake
 
       - name: Install dependencies and run smoke test
         run: make dev && make smoke
