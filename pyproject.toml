@@ -1,6 +1,6 @@
 [project]
 name = "pyiri2016"
-version = "1.2.2"
+version = "1.2.0"
 description = "International Reference Ionosphere 2016 for Python"
 authors = [{name = "Ronald R. Ilma Campana", email = "ronald.ilmacampana@example.com"}]
 readme = "README.md"

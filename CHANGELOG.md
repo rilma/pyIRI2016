@@ -4,7 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.2.0] - 2026-02-21
+
+### Added
+
+- Fallback `TimeUtilities` class implementation in `pyiri2016/__init__.py` for robustness when `timeutil` package is unavailable
+
+### Fixed
+
+- Fixed `NameError: name 'TimeUtilities' is not defined` when `timeutil` package was not installed
+- Added proper dependency declaration for `timeutil` package in `pyproject.toml`
+- Updated imports in `pyiri2016/iri2016prof2D.py` to use fallback `TimeUtilities` if external package is missing
+
+### Changed
+
+- Updated `pyproject.toml` to explicitly include `timeutil` from GitHub as a project dependency
+- Raised minimum Python version requirement to 3.11
+
+## [1.1.0] - 2017-01-12
 
 ### Added
 

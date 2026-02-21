@@ -73,8 +73,8 @@ if __name__ == '__main__':
 
     setup(name=name,
           packages=find_packages(),
-        version='1.2.2',
-        author=['Ronald Ilma','Michael Hirsch, Ph.D.'],
+        version='1.2.0',
+        author=['Ronald Ilma'],
         url = 'https://github.com/rilma/pyIRI2016',
         description='IRI2016 International Reference Ionosphere via Python',
         classifiers=[
@@ -92,6 +92,6 @@ if __name__ == '__main__':
         extras_require={'plot':['matplotlib','seaborn','scipy',],},
         dependency_links=[
       'https://github.com/rilma/TimeUtilities/zipball/master#egg=timeutil-999.0'],
-        python_requires='>=2.7',
+        python_requires='>=3.11',
         )
 
