@@ -327,11 +327,11 @@ class IRI2016_2DProf(IRI2016Profile):
                 elif counter == 2:
                     Z = self.te
                     vmin, vmax, nc = 100, 1200, 36 + 1
-                    zlabel = "T$_e$($^\circ$)"
+                    zlabel = r"T$_e$($^\circ$)"
                 elif counter == 3:
                     Z = self.tn
                     vmin, vmax, nc = 100, 1200, 36 + 1
-                    zlabel = "T$_n$($^\circ$)"
+                    zlabel = r"T$_n$($^\circ$)"
 
                 Z_masked = masked_where(isnan(Z), Z)
 
@@ -345,7 +345,7 @@ class IRI2016_2DProf(IRI2016Profile):
                     pn.set_title(self._title2)
 
                 if counter > 1:
-                    pn.set_xlabel("Geog. Lat. ($^\circ$)")
+                    pn.set_xlabel(r"Geog. Lat. ($^\circ$)")
 
                 pn.set_ylabel("Altitude (km)")
                 pn.set_ylim(self.hlim)
@@ -401,7 +401,7 @@ class IRI2016_2DProf(IRI2016Profile):
                 if counter == 0:
                     pn.set_title(self._title1)
                 # if counter == 1: pn.set_title(self._title2)
-                pn.set_xlabel("Geog. Lat. ($^\circ$)")
+                pn.set_xlabel(r"Geog. Lat. ($^\circ$)")
                 pn.set_ylabel("Altitude (km)")
                 pn.set_ylim(self.hlim)
                 pn.invert_xaxis()
@@ -445,14 +445,14 @@ class IRI2016_2DProf(IRI2016Profile):
             pn.set_xlabel("Hour (UT)")
             pn.set_ylabel("Altitude (km)")
             cp1 = colorbar(ipc)
-            cp1.set_label("T$_e$ ($^\circ$)")
+            cp1.set_label(r"T$_e$ ($^\circ$)")
 
             pn = f.add_subplot(133)
             ipc = pn.pcolor(X, Y, transpose(self.data2D["Ti"]), cmap=cm.jet, vmax=4000, vmin=100)
             pn.set_xlabel("Hour (UT)")
             pn.set_ylabel("Altitude (km)")
             cp1 = colorbar(ipc)
-            cp1.set_label("T$_i$ ($^\circ$)")
+            cp1.set_label(r"T$_i$ ($^\circ$)")
 
         elif self.option == 2:
             pn1 = f.add_subplot(111)
