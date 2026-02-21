@@ -22,7 +22,19 @@ def retrieve(url: str, filename: str, directory: str) -> None:
 
                 # Use the built-in extraction filter when available (Python >=3.11.4 / >=3.12)
                 if hasattr(tarfile, "data_filter"):
-                    tar.extractall(path, numeric_owner=numeric_owner, filter=tarfile.data_filter)
+                    # Check for unsafe members before extraction
+                    for member in tar.getmembers():
+                        # Reject absolute paths
+                        if os.path.isabs(member.name):
+                            raise ValueError(f"Unsafe tar member with absolute path: {member.name}")
+                        # Reject symlinks, hardlinks and special files
+                        if member.issym() or member.islnk() or member.isdev():
+                            raise ValueError(f"Unsafe tar member type: {member.name}")
+                    
+                    try:
+                        tar.extractall(path, numeric_owner=numeric_owner, filter=tarfile.data_filter)
+                    except tarfile.TarError as e:
+                        raise ValueError(f"Unsafe tar member: {e}") from e
                     return
 
                 safe_members = []

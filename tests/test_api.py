@@ -67,20 +67,14 @@ class TestApiUpdate(TestCase):
             fake_path = self._make_tarball_with_traversal(
                 tmpdir, "traversal.tar", "../malicious.txt"
             )
-            with patch(
-                "pyiri2016.api.update.wget.download", return_value=fake_path
-            ):
+            with patch("pyiri2016.api.update.wget.download", return_value=fake_path):
                 with self.assertRaises(ValueError):
                     update.retrieve("http://example.com", "traversal.tar", directory=tmpdir)
 
     def test_retrieve_absolute_path_in_tar_raises(self):
         """A tar member with an absolute path that escapes the target directory must raise ValueError."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            fake_path = self._make_tarball_with_traversal(
-                tmpdir, "absolute.tar", "/etc/passwd"
-            )
-            with patch(
-                "pyiri2016.api.update.wget.download", return_value=fake_path
-            ):
+            fake_path = self._make_tarball_with_traversal(tmpdir, "absolute.tar", "/etc/passwd")
+            with patch("pyiri2016.api.update.wget.download", return_value=fake_path):
                 with self.assertRaises(ValueError):
                     update.retrieve("http://example.com", "absolute.tar", directory=tmpdir)
