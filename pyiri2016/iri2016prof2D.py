@@ -329,7 +329,7 @@ class IRI2016_2DProf(IRI2016Profile):
         # Save plot to file instead of displaying
         figures_dir = Path(__file__).parent.parent / "figures"
         figures_dir.mkdir(exist_ok=True)
-        filepath = figures_dir / "iri_lat_vs_fl.png"
+        filepath = figures_dir / f"iri_lat_vs_fl_{uuid.uuid4().hex[:8]}.png"
         savefig(str(filepath), dpi=100, bbox_inches='tight')
         print(f"Plot saved to: {filepath}")
         close()
