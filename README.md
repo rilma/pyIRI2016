@@ -108,15 +108,6 @@ In a terminal session, pyIRI2016 can be build up as follows:
 make build
 ```
 
-#### Deprecated
-
-```sh
-cd bin
-cmake ../source
-make
-./testiri2016
-```
-
 ### Manual f2py compile
 The function `DFRIDR()` inside `igrf.for` dynamically calls other functions. 
 This is something `f2py` can't access directly, so we tell `f2py` not to hook into function `DFRIDF()` with the end statement `skip: dfridr`
