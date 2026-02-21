@@ -6,10 +6,19 @@ from matplotlib.pyplot import clf, close, cm, colorbar, figure, savefig, show
 from mpl_toolkits.basemap import Basemap
 from os.path import dirname, isdir, join, realpath
 from os import mkdir
-import pyapex, seaborn
+import seaborn
 from scipy.interpolate import interp2d#, RectBivariateSpline
 #
-from pyigrf.pyigrf import GetIGRF
+try:
+    import pyapex
+except ModuleNotFoundError:
+    pyapex = None
+
+try:
+    from pyigrf.pyigrf import GetIGRF
+except ModuleNotFoundError:
+    GetIGRF = None
+
 from pyiri2016 import IRI2016
 from pyiri2016 import IRI2016Profile
 from pyiri2016.iriweb import irisubgl, firisubl
@@ -104,6 +113,12 @@ class IRI2016_2DProf(IRI2016Profile):
     def LatVsFL(self, date=[2003, 11, 21], FIRI=False, IGRF=False, time=[23, 15, 0], \
         gc=[-77.76, -11.95], \
         hlim=[80., 200.], hstp=1., mlatlim=[-10., 10.], mlatstp=.1):
+
+        if pyapex is None:
+            raise ImportError(
+                "pyapex is required for LatVsFL(). "
+                "Install it with: pip install pyapex"
+            )
 
         #
         # INPUTS
@@ -235,6 +250,12 @@ class IRI2016_2DProf(IRI2016Profile):
 
 
     def getIGRF(self, coordl, year):
+
+        if GetIGRF is None:
+            raise ImportError(
+                "pyigrf is required for IGRF calculations. "
+                "Install it with: pip install pyigrf"
+            )
 
         for lon, alt, lat in coordl:
 

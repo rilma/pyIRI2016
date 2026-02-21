@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Plotting dependencies** (issue #28): Added optional `plotting` extras for matplotlib-based visualization
+  - matplotlib, scipy, basemap-data, basemap, seaborn
+  - Install with: `pip install pyiri2016[plotting]`
+- **Optional dependency handling**: Made `pyapex` and `pyigrf` optional with graceful error messages when attempting advanced features
+  - `LatVsFL()` requires pyapex (install with: `pip install pyapex`)
+  - IGRF magnetic field calculations require pyigrf (install with: `pip install pyigrf`)
 - **CMake build system** (issue #26): Modern CMake 3.15+ configuration for cross-platform builds
 - **scikit-build-core backend**: PEP 517/518 compliant build system replacing deprecated numpy.distutils
 - **generate_f2py.py**: Python wrapper script for f2py module generation with proper error handling
@@ -15,12 +21,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Enhanced Makefile targets**:
   - `make clean-venv`: Remove and rebuild virtual environment from scratch
   - `make coverage`: Generate pytest coverage reports with HTML output
+  - `make test-examples`: Test all example scripts (1D plotting and 2D mapping examples)
   - Better separation between `make dev` (development) and `make install` (user installation)
 - **.gitignore enhancements**: Added `.venv/`, `.pytest_cache/`, `htmlcov/` for cleaner repository
 - **Updated GitHub Actions workflow**: Replaced uv package manager with system dependencies (gfortran, cmake)
 
 ### Changed
 
+- **pyproject.toml**: Added optional `plotting` extras group with visualization dependencies; added `packaging>=24.0` to build requirements
+- **Makefile**: Split `dev` and `dev-plotting` targets for separate development environments; added `packaging>=24.0` to pip upgrades
+- **iri2016prof2D.py**: Made `pyapex` and `pyigrf` optional imports with graceful error handling
 - **NumPy upgrade** (issue #29): Upgraded from numpy<2.0 to numpy>=2.0 (latest version supported under Python 3.11)
   - Updated all build and runtime configurations to support NumPy 2.0+
   - Requires Python 3.11+ (already enforced)
@@ -46,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **UTF-8 encoding issue** in Fortran source parsing: f2py now correctly handles non-ASCII characters through proper environment variable propagation
 - **GitHub Actions workflow**: Updated to work with new CMake-based build system
+- **Plotting examples** (issue #28): Added missing dependencies and created `make test-examples` target for testing
 
 ## [1.2.0] - 2026-02-21
 
