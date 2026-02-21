@@ -9,11 +9,12 @@ make test      # Run tests
 make build     # Create distribution packages
 ```
 
-## What Was Fixed
+## What's New in v1.2.0
 
-✅ **UTF-8 Encoding** - Fortran files now read correctly via charset-normalizer  
-✅ **setuptools Compatibility** - Pinned to 59.6.0 for numpy.distutils support  
-✅ **Build System** - All 3 Makefile targets (dev, build, test) now work  
+✅ **TimeUtilities Integration** - Added fallback implementation for robustness when external package is unavailable  
+✅ **Improved Dependency Management** - Explicit `timeutil` package dependency from GitHub  
+✅ **Python 3.11+ Minimum** - Raised minimum Python version requirement to 3.11  
+✅ **Project Cleanup** - Removed obsolete Poetry/Meson build files for a cleaner repository  
 
 ## Build Process
 
@@ -137,14 +138,14 @@ find . -type d -name "*.egg-info" -exec rm -rf {} + 2>/dev/null
 | `pyproject.toml` | PEP 518 build config - dependencies and metadata |
 | `setup.py` | Package setup and Fortran extension definition |
 | `.env` | Environment variables (UTF-8 encoding) |
-| `setup.cfg` | Setuptools configuration |
+
 
 ## Next Steps
 
 1. Run `make dev` to test the installation
 2. Run `make test` to verify functionality
 3. Run `make build` to create distribution packages
-4. See `BUILD_FIX_SUMMARY.md` for technical details
+4. See `CHANGELOG.md` for release notes
 
 ## Success Criteria
 
@@ -166,8 +167,8 @@ After `make test`:
 
 After `make build`:
 ```bash
-✓ dist/pyiri2016-1.2.2.tar.gz created (source distribution)
-✓ dist/pyiri2016-1.2.2-*.whl created (binary wheel)
+✓ dist/pyiri2016-1.2.0.tar.gz created (source distribution)
+✓ dist/pyiri2016-1.2.0-*.whl created (binary wheel)
 ```
 
 ---
