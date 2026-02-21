@@ -1,6 +1,5 @@
 import uuid
 from pathlib import Path
-import uuid
 from numpy import arange, array, ceil, empty, floor, isnan, linspace, \
     log10, meshgrid, nan, tile, transpose, where
 from numpy.ma import masked_where
