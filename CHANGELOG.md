@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **NumPy upgrade** (issue #29): Upgraded from numpy<2.0 to numpy>=2.0 (latest version supported under Python 3.11)
+  - Updated all build and runtime configurations to support NumPy 2.0+
+  - Requires Python 3.11+ (already enforced)
 - **Build system**: Migrated from `setup.py` + `numpy.distutils` to `CMakeLists.txt` + `scikit-build-core`
 - **Documentation**: 
   - Updated README.md with modern build system instructions

@@ -10,14 +10,14 @@ clean-venv:
 dev:
 	[ -d .venv ] || python3 -m venv .venv
 	./.venv/bin/python -m pip install --upgrade pip wheel setuptools
-	./.venv/bin/python -m pip install 'numpy>=1.21.5,<2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja charset-normalizer
+	./.venv/bin/python -m pip install 'numpy>=2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja charset-normalizer
 	bash -c 'VIRTUAL_ENV=./.venv PYTHONIOENCODING=utf-8 LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 ./.venv/bin/python -m pip install -e .'
 	./.venv/bin/python -m pip install pre-commit coverage pytest pytest-cov parameterized
 
 build:
 	[ -d .venv ] || python3 -m venv .venv
 	./.venv/bin/python -m pip install --upgrade pip wheel setuptools
-	./.venv/bin/python -m pip install 'numpy>=1.21.5,<2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja
+	./.venv/bin/python -m pip install 'numpy>=2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja
 	./.venv/bin/python -m pip install --no-build-isolation 'build[uv]'
 	./.venv/bin/python -m build
 
@@ -27,7 +27,7 @@ coverage:
 install:
 	[ -d .venv ] || python3 -m venv .venv
 	./.venv/bin/python -m pip install --upgrade pip wheel setuptools
-	./.venv/bin/python -m pip install 'numpy>=1.21.5,<2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja
+	./.venv/bin/python -m pip install 'numpy>=2.0' simple-settings beautifulsoup4 wget 'scikit-build-core' cmake ninja
 	./.venv/bin/python -m pip install .
 
 smoke:

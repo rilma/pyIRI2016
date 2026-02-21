@@ -18,7 +18,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-    "numpy>=1.26.0,<2.0",
+    "numpy>=2.0",
     "simple-settings>=1.2.0",
     "beautifulsoup4>=4.10.0",
     "wget>=3.2",
@@ -35,7 +35,7 @@ dev = [
 ]
 
 [build-system]
-requires = ["scikit-build-core", "numpy>=1.26.0,<2.0"]
+requires = ["scikit-build-core", "numpy>=2.0"]
 build-backend = "scikit_build_core.build"
 
 [tool.scikit-build]
